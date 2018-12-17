@@ -7,6 +7,45 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <!--Create Row Definitions for Window-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <!--Create Menu-->
+        <Menu Grid.Row="0">
+            <!--Header File-->
+            <MenuItem Header="File">
+                <MenuItem x:Name="Button_Open" Header="Open..." Click="Button_Open_Click"/>
+                <MenuItem x:Name="Button_Save" Header="Save"/>
+                <MenuItem x:Name="Button_SaveAs" Header="Save As..."/>
+                <Separator/>
+                <MenuItem x:Name="Button_Quit" Header="Quit"/>
+            </MenuItem>
+        </Menu>
+        <Grid Grid.Row="1">
+            
+        </Grid>
+        <!--Statusbar Leiste Komplett-->
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <!--Statusbar Leiste 1-->
+            <StatusBar Grid.Column="0">
+                <Label x:Name="Label_StatusbarOne" Content="Idle" FontSize="11"/>
+            </StatusBar>
+            <!--Statusbar Leiste 2-->
+            <StatusBar Grid.Column="1">
+                <Label x:Name="Label_StatusbarTwo" Content="" FontSize="11"/>
+            </StatusBar>
+            <!--Statusbar Leiste 3-->
+            <StatusBar Grid.Column="2">
+                <Label x:Name="Label_StatusbarThree" Content="" FontSize="11"/>
+            </StatusBar>
+        </Grid>
     </Grid>
 </Window>
