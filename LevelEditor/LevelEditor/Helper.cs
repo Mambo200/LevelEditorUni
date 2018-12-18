@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using LevelFramework;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace LevelEditor
     public class Helper
     {
         /// <summary>
-        /// Opens a file fialog
+        /// Opens a open file dialog
         /// </summary>
         /// <param name="c">return which button was pressed (Ok, Cancel, Null)</param>
         /// <returns>File Dialog information</returns>
@@ -23,6 +24,26 @@ namespace LevelEditor
             };
             c = openFileDialog.ShowDialog();
             return openFileDialog;
+        }
+
+        /// <summary>
+        /// Opens a save file dialog
+        /// </summary>
+        /// <param name="_path">path of file, not folder</param>
+        /// <param name="_level">level to save</param>
+        /// <returns>save dialog information</returns>
+        public void SaveFile(string _path, Level _level)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                Filter = MainWindow.filter
+            };
+            bool? c = saveFileDialog.ShowDialog();
+
+            if (c == true)
+            {
+                MainWindow.LvlManager.SaveLevel(_path, _level);
+            }
         }
 
         /// <summary>

@@ -23,16 +23,45 @@ namespace LevelEditor
     /// </summary>
     public partial class MainWindow : Window
     {
-
+        public DirectoryInfo fileInfo = null;
         public static string filter = "Level File|*.lvl";
         public static Level level = new Level();
 
-        private static LevelManager levelManager = new LevelManager();
+        private static LevelManager lvlManager = new LevelManager();
+        public static LevelManager LvlManager { get { return lvlManager; } }
         private static Helper h = new Helper();
 
         public MainWindow()
         {
             InitializeComponent();
+            TestFile();
+        }
+
+        private void TestFile()
+        {
+            Level TestLevel = new Level();
+            TestLevel.Name = "MyTestLevel";
+            TestLevel.SizeX = 20;
+            TestLevel.SizeY = 8;
+            TestLevel.Layer = new List<Layer>();
+            for (int y = 0; y < TestLevel.SizeY; y++)
+            {
+                for (int x = 0; x < TestLevel.SizeX; x++)
+                {
+                    Layer layer = new Layer();
+                    Tile tile = new Tile();
+                    layer.Tiles = new List<Tile>();
+                    for (int i = 0; i < 2; i++)
+                    {
+                        tile.PosX = x;
+                        tile.PosY = y;
+                        layer.Tiles.Add(tile);
+                    }
+                    TestLevel.Layer.Add(layer);
+                }
+            }
+            LvlManager.SaveLevel(Environment.CurrentDirectory + ".lvl", TestLevel);
+            LvlManager.SaveLevelXML(Environment.CurrentDirectory + ".xml", TestLevel);
         }
 
 
@@ -73,11 +102,17 @@ namespace LevelEditor
         {
 
         }
+
         #endregion
 
         #region Header
 
         #region ButtonClickEvent
+        private void Button_New_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         private void Button_Open_Click(object sender, RoutedEventArgs e)
         {
             // set status
@@ -98,7 +133,7 @@ namespace LevelEditor
 
                 // set level Path
                 level.Path = file.FileName;
-                level.directoryInfo = new DirectoryInfo(level.Path);
+                fileInfo = new DirectoryInfo(level.Path);
                 SetStatus(Label_StatusbarOne, "Loading File...", true, level.Path);
             }
             // User canceled window
@@ -109,19 +144,38 @@ namespace LevelEditor
             }
 
             // loading File
-            //levelManager.LoadLevel(level.Path);
+            LvlManager.LoadLevel(level.Path);
 
             // loading complete. set statusbar
             SetStatus(Label_StatusbarOne, "Loading Complete", true);
-
         }
 
         private void Button_Quit_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
         }
+
+        private void Button_Save_Click(object sender, RoutedEventArgs e)
+        {
+            lvlManager.SaveLevel(level.Path + "ll", level);
+        }
+
+
+
+
         #endregion
 
+        #endregion
+
+        #region GroupBox
+
+        #region Tiles
+        private void ListBox_Tiles_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ListBoxItem item = (ListBoxItem)ListBox_Tiles.SelectedItem;
+            
+        }
+        #endregion
         #endregion
         // --------------------------------- //
 
