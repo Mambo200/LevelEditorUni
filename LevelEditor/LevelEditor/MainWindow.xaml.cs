@@ -23,11 +23,12 @@ namespace LevelEditor
     /// </summary>
     public partial class MainWindow : Window
     {
-        public string filter = "Level File|*.lvl";
+
+        public static string filter = "Level File|*.lvl";
         public static Level level = new Level();
 
         private static LevelManager levelManager = new LevelManager();
-        internal static LevelManager LevelManager { get => levelManager; set => levelManager = value; }
+        private static Helper h = new Helper();
 
         public MainWindow()
         {
@@ -83,13 +84,13 @@ namespace LevelEditor
             SetStatus(Label_StatusbarOne, "Select File...", false);
 
             // create and open file dialog
-            OpenFileDialog file = OpenFile(out bool? c);
+            OpenFileDialog file = h.OpenFile(out bool? c);
 
             // check result of file dialog
             if (c == true)
             {
                 // check if file is an URL
-                if (FileIsURL(file))
+                if (h.FileIsURL(file))
                 {
                     SetStatus(Label_StatusbarOne, "URLs are not supported", true);
                     return;
@@ -108,7 +109,7 @@ namespace LevelEditor
             }
 
             // loading File
-            LevelManager.LoadLevel(level.Path);
+            //levelManager.LoadLevel(level.Path);
 
             // loading complete. set statusbar
             SetStatus(Label_StatusbarOne, "Loading Complete", true);
@@ -124,53 +125,6 @@ namespace LevelEditor
         #endregion
         // --------------------------------- //
 
-        /// <summary>
-        /// Opens a file fialog
-        /// </summary>
-        /// <param name="c">return which button was pressed (Ok, Cancel, Null)</param>
-        /// <returns>File Dialog information</returns>
-        private OpenFileDialog OpenFile(out bool? c)
-        {
-            OpenFileDialog openFileDialog = new OpenFileDialog
-            {
-                Filter = filter,
-                Multiselect = false
-            };
-            c = openFileDialog.ShowDialog();
-            return openFileDialog;
-        }
-
-        /// <summary>
-        /// check if chosen file was an URL (Does only work with internet connection).
-        /// </summary>
-        /// <param name="_dialog">File Dialog Information</param>
-        /// <returns>true: file was an URL</returns>
-        private bool FileIsURL(OpenFileDialog _dialog)
-        {
-            // stop when chosen file is an URL
-            string temporaryInternetFilesDir = Environment.GetFolderPath(System.Environment.SpecialFolder.InternetCache);
-            if (!string.IsNullOrEmpty(temporaryInternetFilesDir) &&
-            _dialog.FileName.StartsWith(temporaryInternetFilesDir, StringComparison.InvariantCultureIgnoreCase))
-                return true;
-            else
-                return false;
-        }
-
-        /// <summary>
-        /// check if chosen file was an URL (Does only work with internet connection).
-        /// </summary>
-        /// <param name="_fileName">Path of File</param>
-        /// <returns>true: file was an URL</returns>
-        private bool FileIsURL(string _fileName)
-        {
-            // stop when chosen file is an URL
-            string temporaryInternetFilesDir = Environment.GetFolderPath(System.Environment.SpecialFolder.InternetCache);
-            if (!string.IsNullOrEmpty(temporaryInternetFilesDir) &&
-            _fileName.StartsWith(temporaryInternetFilesDir, StringComparison.InvariantCultureIgnoreCase))
-                return true;
-            else
-                return false;
-        }
 
 
     }
