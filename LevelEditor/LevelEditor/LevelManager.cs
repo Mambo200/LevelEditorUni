@@ -10,7 +10,7 @@ using LevelFramework;
 
 namespace LevelEditor
 {
-    class LevelManager
+    public class LevelManager
     {
         public Level LoadLevel(string _path)
         {
