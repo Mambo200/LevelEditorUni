@@ -21,7 +21,7 @@
                 <MenuItem x:Name="Button_Save" Header="Save"/>
                 <MenuItem x:Name="Button_SaveAs" Header="Save As..."/>
                 <Separator/>
-                <MenuItem x:Name="Button_Quit" Header="Quit"/>
+                <MenuItem x:Name="Button_Quit" Header="Quit" Click="Button_Quit_Click"/>
             </MenuItem>
         </Menu>
         <Grid Grid.Row="1">
