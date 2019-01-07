@@ -20,7 +20,7 @@
                 <MenuItem x:Name="Button_New" Header="New" Click="Button_New_Click"/>
                 <MenuItem x:Name="Button_Open" Header="Open..." Click="Button_Open_Click"/>
                 <MenuItem x:Name="Button_Save" Header="Save" Click="Button_Save_Click"/>
-                <MenuItem x:Name="Button_SaveAs" Header="Save As..."/>
+                <MenuItem x:Name="Button_SaveAs" Header="Save As..." Click="Button_SaveAs_Click"/>
                 <Separator/>
                 <MenuItem x:Name="Button_Quit" Header="Quit" Click="Button_Quit_Click"/>
             </MenuItem>
@@ -33,7 +33,14 @@
                 <ColumnDefinition Width="70*"/>
             </Grid.ColumnDefinitions>
             <!--Spalte Rechte Seite-->
-            
+            <!--Spalten-->
+            <Grid x:Name="Grid_GridButtons" Grid.Column="3">
+                <Grid.RowDefinitions>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                </Grid.ColumnDefinitions>
+                <!--Button-->
+            </Grid>
             <!--Bewegbalken waagerecht-->
             <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch"/>
             <!--Spalte linke Seite-->
@@ -56,7 +63,7 @@
                     </Grid>
                 </GroupBox>
                 <!--GroupBox unten-->
-                <GroupBox Grid.Row="2" Header="Properties">
+                <GroupBox x:Name="delete" Grid.Row="2" Header="Properties">
                     <Grid>
                         <!--Zeilen erstellen-->
                         <Grid.RowDefinitions>
@@ -69,8 +76,8 @@
                         </Grid.RowDefinitions>
                         <!--Spalten erstellen-->
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="45*"/>
-                            <ColumnDefinition Width="55*"/>
+                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <!--create Label-->
                         <Label Grid.Row="0" Grid.Column="0" Content="Name:"/>
@@ -82,6 +89,8 @@
                         <TextBox x:Name="TextBox_PosX" Grid.Row="1" Grid.Column="1" IsEnabled="False" Margin="1"/>
                         <TextBox x:Name="TextBox_PosY" Grid.Row="2" Grid.Column="1" IsEnabled="False" Text="Test" Margin="1"/>
                         <CheckBox x:Name="CheckBox_PosY" Grid.Row="3" Grid.Column="1" IsEnabled="False" Margin="1"/>
+                        <Button Grid.Row="4" Grid.Column="0" Margin="5" Content="DO1" Click="Button_DevOnly1_Click"/>
+                        <Button Grid.Row="4" Grid.Column="1" Margin="5" Content="DO2" Click="Button_DevOnly2_Click"/>
                     </Grid>
                 </GroupBox>
             </Grid>

@@ -31,5 +31,6 @@ namespace LevelFramework
         public int PosX;
         public int PosY;
         public bool HasCollision;
+        public string Commentary;
     }
 }
