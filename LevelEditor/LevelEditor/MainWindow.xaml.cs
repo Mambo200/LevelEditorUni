@@ -58,8 +58,6 @@ namespace LevelEditor
             // Test
             UIElementCollection u = Grid_GridButtons.Children;
 
-            //GenerateGridWithButtons(10, 10);
-            
             u = Grid_GridButtons.Children;
             var ItemInFirstRow = u.Cast<UIElement>().Where(i => Grid.GetRow(i) == 0);
             
@@ -310,7 +308,13 @@ namespace LevelEditor
         #region Name
         private void TextBox_SpriteID_TextChanged(object sender, TextChangedEventArgs e)
         {
-            List<Layer> newLayer = level.Layer;
+            // return if button = null
+            if (CurrentButton == null)
+                return;
+
+            string BttnTag = CurrentButton.Tag.ToString();
+            string[] tagSplit = BttnTag.Split('|');
+            allButtons[Convert.ToInt32(tagSplit[0]), Convert.ToInt32(tagSplit[1])].Background = Brushes.Aqua;
             
             level.Name = TextBox_SpriteID.Text;
         }
@@ -409,7 +413,7 @@ namespace LevelEditor
         private void GenerateGridWithButtons(int _rowDef, int _columnDef)
         {
             // generate All Buttons array
-            allButtons = new Button[_rowDef, _columnDef];
+            allButtons = new Button[_columnDef, _rowDef];
 
             allRows = new RowDefinition[_rowDef];
             allColumns = new ColumnDefinition[_columnDef];
@@ -441,9 +445,9 @@ namespace LevelEditor
                 for (int col = 0; col < _columnDef; col++)
                 {
                     // create Button
-                    Button bttn = CreateButton(row, col, row + "|" + col);
+                    Button bttn = CreateButton(row, col, col + "|" + row);
                     // write Button in array
-                    allButtons[row, col] = bttn;
+                    allButtons[col, row] = bttn;
                     // show button in grid
                     ShowButtonInGrid(row, col, bttn);
                 }
@@ -462,10 +466,11 @@ namespace LevelEditor
         private Button CreateButton(int _row, int _col, string _buttonContent = "")
         {
             Button bttn = DefaultValue.DefaultButton;
-            bttn.Tag = _row + "|" + _col;
+            bttn.Tag = _col + "|" + _row;
             bttn.Content = _buttonContent;
             bttn.Click += bttn_Click;
             bttn.Focusable = false;
+            
 
             return bttn;
         }
