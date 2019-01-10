@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LevelEditor"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" Closing="Window_Closing">
     <Grid>
         <!--Create Row Definitions for Window-->
         <Grid.RowDefinitions>
@@ -16,7 +16,7 @@
         <!--Create Menu-->
         <Menu Grid.Row="0">
             <!--Header File-->
-            <MenuItem Header="File">
+            <MenuItem Header="File" TabIndex="0" Focusable="False">
                 <MenuItem x:Name="Button_New" Header="New" Click="Button_New_Click"/>
                 <MenuItem x:Name="Button_Open" Header="Open..." Click="Button_Open_Click"/>
                 <MenuItem x:Name="Button_Save" Header="Save" Click="Button_Save_Click"/>
@@ -35,14 +35,10 @@
             <!--Spalte Rechte Seite-->
             <!--Spalten-->
             <Grid x:Name="Grid_GridButtons" Grid.Column="3">
-                <Grid.RowDefinitions>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                </Grid.ColumnDefinitions>
                 <!--Button-->
             </Grid>
             <!--Bewegbalken waagerecht-->
-            <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch"/>
+            <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" Focusable="False"/>
             <!--Spalte linke Seite-->
             <Grid Grid.Row="0">
                 <Grid.RowDefinitions>
@@ -51,7 +47,7 @@
                     <RowDefinition Height="50*"/>
                 </Grid.RowDefinitions>
                 <!--Bewegbalken senkrecht-->
-                <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch"/>
+                <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" Focusable="False"/>
                 <!--GroupBox oben-->
                 <GroupBox Grid.Row="0" Header="Tiles">
                     <Grid>
@@ -71,8 +67,9 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
                         <!--Spalten erstellen-->
                         <Grid.ColumnDefinitions>
@@ -80,17 +77,23 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <!--create Label-->
-                        <Label Grid.Row="0" Grid.Column="0" Content="Name:"/>
+                        <Label Grid.Row="0" Grid.Column="0" Content="Sprite ID:"/>
                         <Label Grid.Row="1" Grid.Column="0" Content="PosX:"/>
                         <Label Grid.Row="2" Grid.Column="0" Content="PosY:"/>
-                        <Label Grid.Row="3" Grid.Column="0" Content="Collision:"/>
+                        <Label Grid.Row="3" Grid.Column="0" Content="Comment:"/>
+                        <Label Grid.Row="4" Grid.Column="0" Content="Collision:"/>
+                        <Label Grid.Row="5" Grid.Column="0" Content="Tag:"/>
                         <!--TextBox of Label-->
-                        <TextBox x:Name="TextBox_Name" Grid.Row="0" Grid.Column="1" IsEnabled="False" Margin="1"/>
-                        <TextBox x:Name="TextBox_PosX" Grid.Row="1" Grid.Column="1" IsEnabled="False" Margin="1"/>
-                        <TextBox x:Name="TextBox_PosY" Grid.Row="2" Grid.Column="1" IsEnabled="False" Text="Test" Margin="1"/>
-                        <CheckBox x:Name="CheckBox_PosY" Grid.Row="3" Grid.Column="1" IsEnabled="False" Margin="1"/>
-                        <Button Grid.Row="4" Grid.Column="0" Margin="5" Content="DO1" Click="Button_DevOnly1_Click"/>
-                        <Button Grid.Row="4" Grid.Column="1" Margin="5" Content="DO2" Click="Button_DevOnly2_Click"/>
+                        <TextBox x:Name="TextBox_SpriteID" Grid.Row="0" Grid.Column="1" Margin="1" TabIndex="1" TextChanged="TextBox_SpriteID_TextChanged"/>
+                        <TextBox x:Name="TextBox_PosX" Grid.Row="1" Grid.Column="1" Margin="1" TabIndex="2" TextChanged="TextBox_PosX_TextChanged"/>
+                        <TextBox x:Name="TextBox_PosY" Grid.Row="2" Grid.Column="1" Margin="1" TabIndex="3" TextChanged="TextBox_PosY_TextChanged"/>
+                        <TextBox x:Name="TextBox_Comment" Grid.Row="3" Grid.Column="1" Text="Comment" Margin="1" TabIndex="4" TextChanged="TextBox_Comment_TextChanged"/>
+                        <CheckBox x:Name="CheckBox_Collision" Grid.Row="4" Grid.Column="1" Margin="0" Checked="CheckBox_Collision_Checked" Unchecked="CheckBox_Collision_Unchecked" TabIndex="5"/>
+                        <TextBox x:Name="TextBox_Tag" Grid.Row="5" Grid.Column="1" Margin="1" TabIndex="6" TextChanged="TextBox_Tag_TextChanged"/>
+                        <!--
+                        <Button Grid.Row="6" Grid.Column="0" Margin="5" Content="DO1" Click="Button_DevOnly1_Click"/>
+                        <Button Grid.Row="6" Grid.Column="1" Margin="5" Content="DO2" Click="Button_DevOnly2_Click"/>
+                        -->
                     </Grid>
                 </GroupBox>
             </Grid>

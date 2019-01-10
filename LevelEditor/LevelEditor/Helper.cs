@@ -26,23 +26,58 @@ namespace LevelEditor
             return openFileDialog;
         }
 
-        /// <summary>
-        /// Opens a save file dialog
+        ///<summary>
+        /// Opens a save file dialog and save current level
         /// </summary>
-        /// <param name="_path">path of file, not folder</param>
-        /// <param name="_level">level to save</param>
-        /// <returns>save dialog information</returns>
-        public void SaveFile(string _path, Level _level)
+        /// <param name="successful">file was saved (true) or not (false)</param>
+        public void SaveFile(out bool? successful)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog
             {
                 Filter = MainWindow.filter
             };
-            bool? c = saveFileDialog.ShowDialog();
+            successful = saveFileDialog.ShowDialog();
 
-            if (c == true)
+            if (successful == true)
             {
-                MainWindow.LvlManager.SaveLevel(_path, _level);
+                if (saveFileDialog.FilterIndex == 1)
+                {
+                    MainWindow.LvlManager.SaveLevel(saveFileDialog.FileName, MainWindow.level);
+                }
+                else if (saveFileDialog.FilterIndex == 2)
+                {
+                    MainWindow.LvlManager.SaveLevelXML(saveFileDialog.FileName, MainWindow.level);
+                }
+
+                MainWindow.path = saveFileDialog.FileName;
+                MainWindow.changed = false;
+            }
+
+        }
+        ///<summary>
+        /// Opens a save file dialog and save level
+        /// </summary>
+        /// <param name="_level">level to save</param>
+        /// <param name="successful">file was saved (true) or not (false)</param>
+        public void SaveFile(Level _level, out bool? successful)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                Filter = MainWindow.filter
+            };
+            successful = saveFileDialog.ShowDialog();
+
+            if (successful == true)
+            {
+                // check Filterindex
+                if (saveFileDialog.FilterIndex == 0)
+                {
+                    MainWindow.LvlManager.SaveLevel(saveFileDialog.FileName, _level);
+                }
+                else if (saveFileDialog.FilterIndex == 1)
+                {
+                    MainWindow.LvlManager.SaveLevelXML(saveFileDialog.FileName, _level);
+                }
             }
         }
 
