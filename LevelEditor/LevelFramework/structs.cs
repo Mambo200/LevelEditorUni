@@ -17,6 +17,11 @@ namespace LevelFramework
         public int SizeY;
         ///<summary>Layers in Game</summary>
         public List<Layer> Layer;
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 
     [Serializable]
@@ -43,5 +48,10 @@ namespace LevelFramework
         public string Commentary;
         ///<summary>Tag to this Tile</summary>
         public string Tag;
+
+        public override string ToString()
+        {
+            return (PosX + '|' + PosY).ToString();
+        }
     }
 }
