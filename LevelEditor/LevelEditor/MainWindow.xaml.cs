@@ -28,8 +28,14 @@ namespace LevelEditor
         public static DirectoryInfo fileInfo = null;
         ///<summary>filter for file</summary>
         public static string filter = "Level File|*.lvl|XML File|*.xml";
-        ///<summary>Current Level info</summary>
+        ///<summary>Current Level Level info</summary>
         public static Level level = new Level();
+        ///<summary>Current Level Layer info</summary>
+        public static Layer[] levelLayer;
+        ///<summary>Current Layer Tile info</summary>
+        public static Tile[] levelTile;
+        ///<summary>Current Layer Tile array position</summary>
+        public static int currentTileArrayPos = 0;
         public static string path;
         ///<summary>true if something was changed</summary>
         public static bool changed = false;
@@ -135,7 +141,7 @@ namespace LevelEditor
         #endregion
 
         #region Header
-
+        
         #region ButtonClickEvent        
         /// <summary>
         /// Create new Level File
@@ -207,6 +213,9 @@ namespace LevelEditor
         /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void Button_Open_Click(object sender, RoutedEventArgs e)
         {
+            // temp level
+            Level tmpLevel = new Level();
+
             // set status
             SetStatus(Label_StatusbarOne, "Select File...", false);
 
@@ -233,16 +242,26 @@ namespace LevelEditor
                 SetStatus(Label_StatusbarOne, "Canceled", true);
                 return;
             }
-
             // loading File
-            level = LvlManager.LoadLevel(path);
+            if (file.FilterIndex == 1)
+                level = LvlManager.LoadLevel(path);
+            else if (file.FilterIndex == 2)
+                level = LvlManager.LoadLevelXML(path);
+
+            // save to temp level
+            tmpLevel = level;
 
             // delete old grid and buttons
             DeleteEverything();
 
             // set grid and buttons
             GenerateGridWithButtons(level.SizeY, level.SizeX);
-            
+
+            // set level, temp layer and Tiles
+            level = tmpLevel;
+            levelLayer = level.Layer.ToArray();
+            levelTile = levelLayer[0].Tiles.ToArray();
+
             // loading complete. set statusbar
             SetStatus(Label_StatusbarOne, "Loading Complete", true);
         }
@@ -254,7 +273,15 @@ namespace LevelEditor
         /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void Button_Quit_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.Shutdown();
+            if (!WasChanged(out bool? result))
+            {
+                Application.Current.Shutdown();
+            }
+
+            if (result == true)
+            {
+                Application.Current.Shutdown();
+            }
         }
 
         /// <summary>
@@ -264,6 +291,9 @@ namespace LevelEditor
         /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void Button_Save_Click(object sender, RoutedEventArgs e)
         {
+            levelLayer[0].Tiles = levelTile.ToList();
+            level.Layer = levelLayer.ToList();
+
             if (path == null)
                 Button_SaveAs_Click(sender, e);
             else
@@ -280,6 +310,9 @@ namespace LevelEditor
         /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void Button_SaveAs_Click(object sender, RoutedEventArgs e)
         {
+            levelLayer[0].Tiles = levelTile.ToList();
+            level.Layer = levelLayer.ToList();
+
             h.SaveFile(out bool? succellful);
             if (succellful == true)
                 ConfirmClose = true;
@@ -301,11 +334,10 @@ namespace LevelEditor
             
         }
         #endregion
-        #endregion
 
         #region Properties Window
 
-        #region Name
+        #region Sprite ID
         private void TextBox_SpriteID_TextChanged(object sender, TextChangedEventArgs e)
         {
             // return if button = null
@@ -314,30 +346,28 @@ namespace LevelEditor
 
             string BttnTag = CurrentButton.Tag.ToString();
             string[] tagSplit = BttnTag.Split('|');
-            allButtons[Convert.ToInt32(tagSplit[0]), Convert.ToInt32(tagSplit[1])].Background = Brushes.Aqua;
+            // check if input was number
+            bool work = int.TryParse(TextBox_SpriteID.Text.ToString(), out int number);
+            if (work)
+            {
+                levelTile[currentTileArrayPos].SpriteID = Convert.ToInt32(TextBox_SpriteID.Text.ToString());
+                TextBox_SpriteID.BorderBrush = Brushes.Gray;
+                TextBox_SpriteID.Background = Brushes.White;
+            }
+            else
+            {
+                TextBox_SpriteID.BorderBrush = Brushes.Red;
+                TextBox_SpriteID.Background = Brushes.Red;
+            }
             
             level.Name = TextBox_SpriteID.Text;
-        }
-        #endregion
-
-        #region PosX
-        private void TextBox_PosX_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-        #endregion
-
-        #region PosY
-        private void TextBox_PosY_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
         }
         #endregion
 
         #region Comment
         private void TextBox_Comment_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            levelTile[currentTileArrayPos].Commentary = TextBox_Comment.Text.ToString();
         }
         #endregion
 
@@ -349,7 +379,7 @@ namespace LevelEditor
             if (CurrentButton == null)
                 return;
 
-            string Tag = CurrentButton.Tag.ToString();
+            levelTile[currentTileArrayPos].HasCollision = true;
         }
 
         private void CheckBox_Collision_Unchecked(object sender, RoutedEventArgs e)
@@ -358,7 +388,7 @@ namespace LevelEditor
             if (CurrentButton == null)
                 return;
 
-            string Tag = CurrentButton.Tag.ToString();
+            levelTile[currentTileArrayPos].HasCollision = false;
 
         }
         #endregion
@@ -366,8 +396,10 @@ namespace LevelEditor
         #region Tag
         private void TextBox_Tag_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            levelTile[currentTileArrayPos].Tag = TextBox_Tag.Text.ToString();
         }
+        #endregion
+
         #endregion
 
         #endregion
@@ -382,6 +414,20 @@ namespace LevelEditor
         {
             CurrentButton = (Button)sender;
             changed = true;
+
+            // fill PosX and PosY
+            string BttnTag = CurrentButton.Tag.ToString();
+            string[] tagSplit = BttnTag.Split('|');
+            LayerArrayPos(tagSplit[0], tagSplit[1]);
+            TextBox_PosX.Text = levelTile[currentTileArrayPos].PosX.ToString();
+            TextBox_PosY.Text = levelTile[currentTileArrayPos].PosY.ToString();
+            TextBox_SpriteID.Text = levelTile[currentTileArrayPos].SpriteID.ToString();
+            TextBox_SpriteID.BorderBrush = Brushes.Gray;
+            TextBox_SpriteID.Background = Brushes.White;
+            TextBox_Comment.Text = levelTile[currentTileArrayPos].Commentary.ToString();
+            CheckBox_Collision.IsChecked = levelTile[currentTileArrayPos].HasCollision;
+            TextBox_Tag.Text = levelTile[currentTileArrayPos].Tag.ToString();
+            
         }
         #endregion
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -412,6 +458,8 @@ namespace LevelEditor
         /// <param name="_columnDef">width of column (X Size)</param>
         private void GenerateGridWithButtons(int _rowDef, int _columnDef)
         {
+            // add layer
+            levelLayer = new Layer[1];
             // generate All Buttons array
             allButtons = new Button[_columnDef, _rowDef];
 
@@ -439,6 +487,11 @@ namespace LevelEditor
                 Grid_GridButtons.ColumnDefinitions.Add(c);
             }
 
+            // create Tile
+            levelTile = new Tile[_rowDef * _columnDef];
+            // counter
+            int counter = 0;
+
             // create buttons
             for (int row = 0; row < _rowDef; row++)
             {
@@ -450,10 +503,29 @@ namespace LevelEditor
                     allButtons[col, row] = bttn;
                     // show button in grid
                     ShowButtonInGrid(row, col, bttn);
-                }
-            }
 
+                    // create Tile
+                    Tile t = new Tile();
+                    t.PosX = col;
+                    t.PosY = row;
+                    t.SpriteID = 0;
+                    t.Commentary = "";
+                    t.HasCollision = false;
+                    t.Tag = "";
+
+                    // copy tile to array
+                    levelTile[counter] = t;
+                    counter++;
+                }
+                // set layer
+                levelLayer[0].ZOrder = 0;
+                levelLayer[0].Tiles = levelTile.ToList();
+            }
+            // set status
             SetStatus(Label_StatusbarOne, "Buttons created");
+
+            // reset Textboxes
+            ResetTextBox();
         }
 
         /// <summary>
@@ -596,6 +668,43 @@ namespace LevelEditor
                 MsgBoxResult = null;
 
             return true;
+        }
+
+        /// <summary>
+        /// Get array position in Tile Array
+        /// </summary>
+        /// <param name="_xPos">x position button</param>
+        /// <param name="_yPos">y position button</param>
+        /// <returns>position in Tile Array</returns>
+        public static void LayerArrayPos(int _xPos, int _yPos)
+        {
+            int pos = level.SizeX * _yPos;
+            pos += _xPos;
+            currentTileArrayPos = pos;
+        }
+
+        /// <summary>
+        /// Get array position in Tile Array
+        /// </summary>
+        /// <param name="_xPos">x position button</param>
+        /// <param name="_yPos">y position button</param>
+        /// <returns>position in Tile Array</returns>
+        public static void LayerArrayPos(string _xPos, string _yPos)
+        {
+            LayerArrayPos(Convert.ToInt32(_xPos), Convert.ToInt32(_yPos));
+        }
+
+        /// <summary>
+        /// Reset Test of Textboxes
+        /// </summary>
+        public void ResetTextBox()
+        {
+            TextBox_PosX.Text = "";
+            TextBox_PosY.Text = "";
+            TextBox_SpriteID.Text = "";
+            TextBox_Comment.Text = "";
+            CheckBox_Collision.IsChecked = false;
+            TextBox_Tag.Text = "";
         }
     }
 }
