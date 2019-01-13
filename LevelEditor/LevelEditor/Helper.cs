@@ -115,3 +115,27 @@ namespace LevelEditor
 
     }
 }
+
+
+
+
+/*
+ * using (MemoryStream memory = new MemoryStream())
+                    {
+                        BitmapImage img = new BitmapImage();
+
+                        img.BeginInit();
+                        img.StreamSource = memory;
+                        img.UriSource = new Uri(tempImgLocation, UriKind.Absolute);
+                        idToSpriteLocation.Add("A" + rep + "_" + number, img);
+                        try
+                        {
+                        img.EndInit();
+                        }
+                        catch (Exception)
+                        {
+                            string s = "";
+                        }
+                    }
+
+    */
