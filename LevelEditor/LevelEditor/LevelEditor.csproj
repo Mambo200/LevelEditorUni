@@ -37,6 +37,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -93,7 +94,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
@@ -109,6 +110,1167 @@
       <Project>{8bf3d32c-3b71-4b5e-b867-46c3239d971f}</Project>
       <Name>LevelFramework</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Image1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\A1_000.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile000.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile005.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile006.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile007.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile008.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile009.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile010.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile011.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile012.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile013.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile014.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile015.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile016.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile017.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile018.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile019.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile020.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile021.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile022.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile023.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile024.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile025.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile026.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile027.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile028.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile029.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile030.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile031.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile032.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile033.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile034.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile035.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile036.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile037.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile038.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile039.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile040.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile041.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile042.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile043.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile044.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile045.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile046.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile047.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile048.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile049.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile050.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile051.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile052.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile053.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile054.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile055.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile056.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile057.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile058.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile059.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile060.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile061.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile062.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile063.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile064.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile065.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile066.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile067.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile068.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile069.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile070.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile071.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile072.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile073.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile074.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile075.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile076.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile077.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile078.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile079.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile080.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile081.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile082.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile083.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile084.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile085.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile086.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile087.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile088.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile089.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile090.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile091.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile092.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile093.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile094.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile095.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile096.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile097.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile098.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile099.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile100.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile101.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile102.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile103.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile104.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile105.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile106.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile107.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile108.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile109.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile110.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile111.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile112.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile113.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile114.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile115.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile116.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile117.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile118.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile119.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile120.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile121.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile122.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile123.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile124.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile125.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile126.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile127.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile128.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile129.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile130.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile131.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile132.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile133.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile134.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile135.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile136.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile137.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile138.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile139.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile140.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile141.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile142.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile143.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile144.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile145.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile146.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile147.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile148.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile149.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile150.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile151.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile152.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile153.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile154.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile155.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile156.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile157.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile158.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile159.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile160.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile161.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile162.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile163.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile164.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile165.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile166.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile167.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile168.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile169.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile170.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile171.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile172.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile173.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile174.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile175.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile176.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile177.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile178.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile179.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile180.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile181.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile182.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile183.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile184.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile185.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile186.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile187.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile188.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile189.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile190.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\tile191.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\A1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile000.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile005.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile006.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile007.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile008.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile009.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile010.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile011.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile012.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile013.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile014.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile015.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile016.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile017.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile018.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile019.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile020.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile021.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile022.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile023.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile024.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile025.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile026.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile027.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile028.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile029.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile030.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile031.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile032.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile033.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile034.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile035.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile036.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile037.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile038.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile039.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile040.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile041.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile042.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile043.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile044.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile045.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile046.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile047.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile048.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile049.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile050.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile051.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile052.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile053.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile054.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile055.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile056.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile057.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile058.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile059.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile060.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile061.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile062.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile063.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile064.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile065.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile066.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile067.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile068.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile069.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile070.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile071.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile072.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile073.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile074.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile075.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile076.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile077.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile078.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile079.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile080.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile081.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile082.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile083.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile084.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile085.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile086.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile087.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile088.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile089.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile090.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile091.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile092.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile093.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile094.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile095.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile096.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile097.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile098.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile099.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile100.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile101.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile102.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile103.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile104.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile105.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile106.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile107.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile108.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile109.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile110.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile111.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile112.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile113.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile114.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile115.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile116.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile117.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile118.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile119.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile120.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile121.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile122.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile123.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile124.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile125.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile126.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile127.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile128.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile129.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile130.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile131.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile132.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile133.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile134.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile135.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile136.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile137.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile138.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile139.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile140.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile141.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile142.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile143.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile144.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile145.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile146.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile147.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile148.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile149.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile150.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile151.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile152.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile153.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile154.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile155.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile156.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile157.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile158.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile159.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile160.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile161.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile162.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile163.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile164.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile165.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile166.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile167.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile168.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile169.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile170.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile171.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile172.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile173.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile174.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile175.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile176.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile177.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile178.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile179.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile180.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile181.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile182.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile183.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile184.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile185.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile186.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile187.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile188.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile189.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile190.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprites\Outside_A1\Frames\A1_tile191.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

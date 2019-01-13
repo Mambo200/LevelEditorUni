@@ -34,8 +34,7 @@
             </Grid.ColumnDefinitions>
             <!--Spalte Rechte Seite-->
             <!--Spalten-->
-            <Grid x:Name="Grid_GridButtons" Grid.Column="3">
-                <!--Button-->
+            <Grid x:Name="Grid_GridBorder" Grid.Column="3">
             </Grid>
             <!--Bewegbalken waagerecht-->
             <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" Focusable="False"/>
@@ -55,7 +54,29 @@
                             <RowDefinition Height="10*"/>
                             <RowDefinition Height="90*"/>
                         </Grid.RowDefinitions>
-                        <ListBox x:Name="ListBox_Tiles" Grid.Row="1" SelectionChanged="ListBox_Tiles_SelectionChanged"/>
+                        <TabControl Grid.Row="1">
+                            <!--Tab 1-->
+                            <TabItem Header="Layer A">
+                                <ScrollViewer>
+                                    <WrapPanel x:Name="WrapPanel_LayerA">
+                                    </WrapPanel>
+                                </ScrollViewer>
+                            </TabItem>
+                            <!--Tab 2-->
+                            <TabItem Header="Layer B">
+                                <ScrollViewer>
+                                    <WrapPanel x:Name="WrapPanel_LayerB">
+                                    </WrapPanel>
+                                </ScrollViewer>
+                            </TabItem>
+                            <!--Tab 3-->
+                            <TabItem Header="Layer C">
+                                <ScrollViewer>
+                                    <WrapPanel x:Name="WrapPanel_LayerC">
+                                    </WrapPanel>
+                                </ScrollViewer>
+                            </TabItem>
+                        </TabControl>
                     </Grid>
                 </GroupBox>
                 <!--GroupBox unten-->
@@ -86,11 +107,11 @@
                         <!--TextBox of Label-->
                         <TextBox x:Name="TextBox_PosX" Grid.Row="0" Grid.Column="1" Margin="1" TabIndex="1" IsEnabled="False"/>
                         <TextBox x:Name="TextBox_PosY" Grid.Row="1" Grid.Column="1" Margin="1" TabIndex="2" IsEnabled="False"/>
-                        <TextBox x:Name="TextBox_SpriteID" Grid.Row="2" Grid.Column="1" Margin="1" TabIndex="3" TextChanged="TextBox_SpriteID_TextChanged"/>
+                        <TextBox x:Name="TextBox_SpriteID" Grid.Row="2" Grid.Column="1" Margin="1" TabIndex="3" IsEnabled="False" TextChanged="TextBox_SpriteID_TextChanged"/>
                         <TextBox x:Name="TextBox_Comment" Grid.Row="3" Grid.Column="1" Margin="1" TabIndex="4" TextChanged="TextBox_Comment_TextChanged"/>
                         <CheckBox x:Name="CheckBox_Collision" Grid.Row="4" Grid.Column="1" Checked="CheckBox_Collision_Checked" Unchecked="CheckBox_Collision_Unchecked" TabIndex="5"/>
                         <TextBox x:Name="TextBox_Tag" Grid.Row="5" Grid.Column="1" Margin="1" TabIndex="6" TextChanged="TextBox_Tag_TextChanged"/>
-                        
+
                         <!--
                         <Button Grid.Row="6" Grid.Column="0" Margin="5" Content="DO1" Click="Button_DevOnly1_Click"/>
                         <Button Grid.Row="6" Grid.Column="1" Margin="5" Content="DO2" Click="Button_DevOnly2_Click"/>

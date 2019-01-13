@@ -37,7 +37,7 @@ namespace LevelFramework
     public struct Tile
     {
         ///<summary>Sprite ID of Tile</summary>
-        public int SpriteID;
+        public string SpriteID;
         ///<summary>X Position of Tile</summary>
         public int PosX;
         ///<summary>Y Position of Tile</summary>

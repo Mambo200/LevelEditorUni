@@ -15,6 +15,8 @@ using System.Windows.Shapes;
 using Microsoft.Win32;
 using LevelFramework;
 using System.IO;
+using System.Reflection;
+using System.Resources;
 using System.Data;
 
 namespace LevelEditor
@@ -36,7 +38,15 @@ namespace LevelEditor
         public static Tile[] levelTile;
         ///<summary>Current Layer Tile array position</summary>
         public static int currentTileArrayPos = 0;
+        /// <summary>Current Sprite ID</summary>
+        public static string CurrentSpriteID;
+        ///<summary>Current Button</summary>
+        private static Border CurrentImage = null;
         public static string path;
+
+        private Dictionary<string, string> idToSpriteLocation = new Dictionary<string, string>();
+
+
         ///<summary>true if something was changed</summary>
         public static bool changed = false;
         /// <summary>Confirm to close Window</summary>
@@ -50,8 +60,7 @@ namespace LevelEditor
         private static Helper h = new Helper();
         ///<summary>All buttons</summary>
         private Button[,] allButtons = null;
-        ///<summary>Current Button</summary>
-        private static Button CurrentButton = null;
+
         ///<summary>All RowDefinitions</summary>
         private RowDefinition[] allRows = null;
         ///<summary>All ColumnDefinitions</summary>
@@ -60,11 +69,16 @@ namespace LevelEditor
         public MainWindow()
         {
             InitializeComponent();
+            CreateLayerA();
+            CreateLayerB();
+            CreateLayerC();
 
             // Test
-            UIElementCollection u = Grid_GridButtons.Children;
+            UIElementCollection u = Grid_GridBorder.Children;
 
-            u = Grid_GridButtons.Children;
+            FillSprites();
+
+            u = Grid_GridBorder.Children;
             var ItemInFirstRow = u.Cast<UIElement>().Where(i => Grid.GetRow(i) == 0);
             
         }
@@ -192,7 +206,7 @@ namespace LevelEditor
                 return;
 
             // delete old grid and buttons
-            DeleteAllButtons();
+            DeleteBorders();
             DeleteGrid();
 
             // generate new level
@@ -328,11 +342,6 @@ namespace LevelEditor
         #region GroupBox
 
         #region Tiles
-        private void ListBox_Tiles_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ListBoxItem item = (ListBoxItem)ListBox_Tiles.SelectedItem;
-            
-        }
         #endregion
 
         #region Properties Window
@@ -341,16 +350,16 @@ namespace LevelEditor
         private void TextBox_SpriteID_TextChanged(object sender, TextChangedEventArgs e)
         {
             // return if button = null
-            if (CurrentButton == null)
+            if (CurrentImage == null)
                 return;
 
-            string BttnTag = CurrentButton.Tag.ToString();
+            string BttnTag = CurrentImage.Tag.ToString();
             string[] tagSplit = BttnTag.Split('|');
             // check if input was number
             bool work = int.TryParse(TextBox_SpriteID.Text.ToString(), out int number);
             if (work)
             {
-                levelTile[currentTileArrayPos].SpriteID = Convert.ToInt32(TextBox_SpriteID.Text.ToString());
+                levelTile[currentTileArrayPos].SpriteID = TextBox_SpriteID.Text.ToString();
                 TextBox_SpriteID.BorderBrush = Brushes.Gray;
                 TextBox_SpriteID.Background = Brushes.White;
             }
@@ -376,7 +385,7 @@ namespace LevelEditor
         private void CheckBox_Collision_Checked(object sender, RoutedEventArgs e)
         {
             // return if no button was chosen
-            if (CurrentButton == null)
+            if (CurrentImage == null)
                 return;
 
             levelTile[currentTileArrayPos].HasCollision = true;
@@ -385,7 +394,7 @@ namespace LevelEditor
         private void CheckBox_Collision_Unchecked(object sender, RoutedEventArgs e)
         {
             // return if no button was chosen
-            if (CurrentButton == null)
+            if (CurrentImage == null)
                 return;
 
             levelTile[currentTileArrayPos].HasCollision = false;
@@ -406,19 +415,23 @@ namespace LevelEditor
 
         #region Grid Buttons
         /// <summary>
-        /// button click event
+        /// left button click event
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
-        private void bttn_Click(object sender, RoutedEventArgs e)
+        private void Img_ClickLeft(object sender, RoutedEventArgs e)
         {
-            CurrentButton = (Button)sender;
+            ResetTextBox();
+
+            CurrentImage = (Border)sender;
             changed = true;
 
             // fill PosX and PosY
-            string BttnTag = CurrentButton.Tag.ToString();
+            string BttnTag = CurrentImage.Tag.ToString();
             string[] tagSplit = BttnTag.Split('|');
             LayerArrayPos(tagSplit[0], tagSplit[1]);
+
+            // set Text at Properties
             TextBox_PosX.Text = levelTile[currentTileArrayPos].PosX.ToString();
             TextBox_PosY.Text = levelTile[currentTileArrayPos].PosY.ToString();
             TextBox_SpriteID.Text = levelTile[currentTileArrayPos].SpriteID.ToString();
@@ -429,6 +442,32 @@ namespace LevelEditor
             TextBox_Tag.Text = levelTile[currentTileArrayPos].Tag.ToString();
             
         }
+
+        /// <summary>
+        /// right button click event
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
+        private void Img_ClickRight(object sender, RoutedEventArgs e)
+        {
+            CurrentImage = (Border)sender;
+            changed = true;
+
+            // fill PosX and PosY
+            string BttnTag = CurrentImage.Tag.ToString();
+            string[] tagSplit = BttnTag.Split('|');
+            LayerArrayPos(tagSplit[0], tagSplit[1]);
+            TextBox_PosX.Text = levelTile[currentTileArrayPos].PosX.ToString();
+            TextBox_PosY.Text = levelTile[currentTileArrayPos].PosY.ToString();
+            TextBox_SpriteID.Text = levelTile[currentTileArrayPos].SpriteID.ToString();
+            TextBox_SpriteID.BorderBrush = Brushes.Gray;
+            TextBox_SpriteID.Background = Brushes.White;
+            TextBox_Comment.Text = levelTile[currentTileArrayPos].Commentary.ToString();
+            CheckBox_Collision.IsChecked = levelTile[currentTileArrayPos].HasCollision;
+            TextBox_Tag.Text = levelTile[currentTileArrayPos].Tag.ToString();
+
+        }
+
         #endregion
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
@@ -448,9 +487,15 @@ namespace LevelEditor
 
             e.Cancel = !ConfirmClose;
         }
+
+        private void Img_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Image img = (Image)sender;
+            CurrentSpriteID = img.Tag.ToString();
+        }
         // ----------------------------------------------------------------------------------------------------- //
 
-        #region Create Grid and Buttons
+        #region Create Grid and Border
         /// <summary>
         /// Generates the grid with buttons.
         /// </summary>
@@ -459,7 +504,7 @@ namespace LevelEditor
         private void GenerateGridWithButtons(int _rowDef, int _columnDef)
         {
             // add layer
-            levelLayer = new Layer[1];
+            levelLayer = new Layer[3];
             // generate All Buttons array
             allButtons = new Button[_columnDef, _rowDef];
 
@@ -474,7 +519,7 @@ namespace LevelEditor
                 // save in array
                 allRows[row] = r;
                 // add RowDefinition to grid
-                Grid_GridButtons.RowDefinitions.Add(r);
+                Grid_GridBorder.RowDefinitions.Add(r);
             }
             // add ColumnDefinition
             for (int col = 0; col < _columnDef; col++)
@@ -484,7 +529,7 @@ namespace LevelEditor
                 // save in array
                 allColumns[col] = c;
                 // add ColumnDefinition to grid
-                Grid_GridButtons.ColumnDefinitions.Add(c);
+                Grid_GridBorder.ColumnDefinitions.Add(c);
             }
 
             // create Tile
@@ -492,23 +537,23 @@ namespace LevelEditor
             // counter
             int counter = 0;
 
-            // create buttons
+            // create image
             for (int row = 0; row < _rowDef; row++)
             {
                 for (int col = 0; col < _columnDef; col++)
                 {
-                    // create Button
-                    Button bttn = CreateButton(row, col, col + "|" + row);
+                    // create Image
+                    Image img = CreateImage(row, col, col + "|" + row);
                     // write Button in array
-                    allButtons[col, row] = bttn;
+                    //allButtons[col, row] = img;
                     // show button in grid
-                    ShowButtonInGrid(row, col, bttn);
+                    ShowPictureInGrid(row, col);
 
                     // create Tile
                     Tile t = new Tile();
                     t.PosX = col;
                     t.PosY = row;
-                    t.SpriteID = 0;
+                    t.SpriteID = "0";
                     t.Commentary = "";
                     t.HasCollision = false;
                     t.Tag = "";
@@ -522,7 +567,7 @@ namespace LevelEditor
                 levelLayer[0].Tiles = levelTile.ToList();
             }
             // set status
-            SetStatus(Label_StatusbarOne, "Buttons created");
+            SetStatus(Label_StatusbarOne, "Images created");
 
             // reset Textboxes
             ResetTextBox();
@@ -531,46 +576,69 @@ namespace LevelEditor
         /// <summary>
         /// creates button
         /// </summary>
-        /// <param name="_row">row of grid</param>
+        /// <param name="_row">row of grid (for Tag)</param>
         /// <param name="_col">column of grid</param>
-        /// <param name="_buttonContent">Content of the button.</param>
+        /// <param name="_imageSource">Content of the button.</param>
         /// <returns></returns>
-        private Button CreateButton(int _row, int _col, string _buttonContent = "")
+        private Image CreateImage(int _row, int _col, string _imageSource)
         {
-            Button bttn = DefaultValue.DefaultButton;
-            bttn.Tag = _col + "|" + _row;
-            bttn.Content = _buttonContent;
-            bttn.Click += bttn_Click;
-            bttn.Focusable = false;
+            Image img = new Image();
+            img.BeginInit();
+            img.Tag = _col + "|" + _row;
             
+            img.Focusable = false;
 
-            return bttn;
+            img.Source = new BitmapImage(new Uri(Environment.CurrentDirectory + "\\Sprites\\empty.png"));
+            img.Stretch = Stretch.Uniform;
+            img.EndInit();
+
+
+            return img;
+        }
+
+        /// <summary>
+        /// Creates a black thickness 1 border
+        /// </summary>
+        /// <param name="_row">Current row (for Tag)</param>
+        /// <param name="_col">Current column (for Tag)</param>
+        /// <returns>black border</returns>
+        private Border CreateBorder(int _row, int _col)
+        {
+            Border border = new Border();
+            border.BorderThickness = new Thickness(1);
+            border.BorderBrush = Brushes.Black;
+            border.MouseLeftButtonDown += Img_ClickLeft;
+            border.MouseRightButtonDown += Img_ClickRight;
+            border.Tag = _col + "|" + _row;
+
+            return border;
         }
         #endregion
 
         #region Show Button Function
         /// <summary>
-        /// Creates a button in Grid_GridButtons with margin = 2
+        /// Creates a button in Grid_GridBorder with margin = 2
         /// </summary>
         /// <param name="_row">row of grid</param>
         /// <param name="_col">column of grid</param>
-        /// <param name="_buttonContent">content of the button.</param>
-        private void ShowButtonInGrid(int _row, int _col, string _buttonContent = "")
+        /// <param name="_imageSource">content of the button.</param>
+        private void ShowPictureInGrid(int _row, int _col, string _imageSource = "")
         {
-            Button bttn = CreateButton(_row, _col, _buttonContent);
-
-            ShowButtonInGrid(_row, _col, Grid_GridButtons, bttn);
+            Image img = CreateImage(_row, _col, _imageSource);
+            Border border = CreateBorder(_row, _col);
+            border.Child = img;
+            ShowPictureInGrid(_row, _col, Grid_GridBorder, border);
         }
 
         /// <summary>
-        /// shows a button in Grid_GridButtons
+        /// shows a button in Grid_GridBorder
         /// </summary>
         /// <param name="_row">row of grid</param>
         /// <param name="_col">column of grid</param>
-        /// <param name="_button">the button</param>
-        private void ShowButtonInGrid(int _row, int _col, Button _button)
+        /// <param name="_border">the button</param>
+        private void ShowPictureInGrid(int _row, int _col, Border _border)
         {
-            ShowButtonInGrid(_row, _col, Grid_GridButtons, _button);
+            ShowPictureInGrid(_row, _col, Grid_GridBorder, _border);
         }
 
         /// <summary>
@@ -579,12 +647,12 @@ namespace LevelEditor
         /// <param name="_row">row of grid</param>
         /// <param name="_col">column of grid</param>
         /// <param name="_grid">the grid itself</param>
-        /// <param name="_button">the button</param>
-        private void ShowButtonInGrid(int _row, int _col, Grid _grid, Button _button)
+        /// <param name="_border">the border with image</param>
+        private void ShowPictureInGrid(int _row, int _col, Grid _grid, Border _border)
         {
-            _grid.Children.Add(_button);
-            Grid.SetRow(_button, _row);
-            Grid.SetColumn(_button, _col);
+            _grid.Children.Add(_border);
+            Grid.SetRow(_border, _row);
+            Grid.SetColumn(_border, _col);
         }
         #endregion
 
@@ -593,9 +661,9 @@ namespace LevelEditor
         /// <summary>
         /// Deletes all buttons.
         /// </summary>
-        private void DeleteAllButtons()
+        private void DeleteBorders()
         {
-            Grid_GridButtons.Children.RemoveRange(0, Grid_GridButtons.Children.Count);
+            Grid_GridBorder.Children.RemoveRange(0, Grid_GridBorder.Children.Count);
         }
 
         /// <summary>
@@ -615,11 +683,11 @@ namespace LevelEditor
         private void DeleteRow()
         {
             // check size of row definition
-            if (Grid_GridButtons.RowDefinitions.Count == 0)
+            if (Grid_GridBorder.RowDefinitions.Count == 0)
                 return;
 
             // delete RowDefinitions
-            Grid_GridButtons.RowDefinitions.RemoveRange(0, Grid_GridButtons.RowDefinitions.Count);
+            Grid_GridBorder.RowDefinitions.RemoveRange(0, Grid_GridBorder.RowDefinitions.Count);
         }
 
         /// <summary>
@@ -628,11 +696,11 @@ namespace LevelEditor
         private void DeleteColumn()
         {
             // check size of row definition
-            if (Grid_GridButtons.ColumnDefinitions.Count == 0)
+            if (Grid_GridBorder.ColumnDefinitions.Count == 0)
                 return;
 
             // delete ColumnDefinitions
-            Grid_GridButtons.ColumnDefinitions.RemoveRange(0, Grid_GridButtons.ColumnDefinitions.Count);
+            Grid_GridBorder.ColumnDefinitions.RemoveRange(0, Grid_GridBorder.ColumnDefinitions.Count);
         }
 
         /// <summary>
@@ -640,7 +708,7 @@ namespace LevelEditor
         /// </summary>
         private void DeleteEverything()
         {
-            DeleteAllButtons();
+            DeleteBorders();
             DeleteGrid();
         }
         #endregion
@@ -695,7 +763,7 @@ namespace LevelEditor
         }
 
         /// <summary>
-        /// Reset Test of Textboxes
+        /// Reset Text of Textboxes
         /// </summary>
         public void ResetTextBox()
         {
@@ -706,5 +774,157 @@ namespace LevelEditor
             CheckBox_Collision.IsChecked = false;
             TextBox_Tag.Text = "";
         }
+
+        #region Show images in Layer
+
+        #region Layer A
+        private void CreateLayerA()
+        {
+            for (int rep = 1; rep < 6; rep++)
+            {
+                string imageLocation = Environment.CurrentDirectory + "\\Sprites\\Outside_A" + rep + "\\Frames\\";
+                string[] allFiles = Directory.GetFiles(imageLocation, "*.png", SearchOption.TopDirectoryOnly);
+                int fileCount = allFiles.GetLength(0);
+
+                LoadImagesToLayer(fileCount, imageLocation, "A", rep);
+            }
+        }
+        #endregion
+
+        #region Layer B
+        private void CreateLayerB()
+        {
+            string imageLocation = Environment.CurrentDirectory + "\\Sprites\\Outside_B\\Frames\\";
+            int folderCount = GetFileCount(imageLocation);
+            for (int i = 0; i < folderCount; i++)
+            {
+                string tempImgLocation = imageLocation;
+                string name = "B1_tile";
+                string number = "";
+                if (i < 10)
+                    number += "00";
+                else if (i < 100)
+                    number += "0";
+                number += i;
+                name += number + ".png";
+
+                tempImgLocation += name;
+                string fullNumber = "B" + "1" + "_" + number;
+                idToSpriteLocation.Add(fullNumber, tempImgLocation);
+                LoadImage(tempImgLocation, fullNumber.First().ToString(), fullNumber);
+
+            }
+        }
+        #endregion
+
+        #region Layer C
+        private void CreateLayerC()
+        {
+            string imageLocation = Environment.CurrentDirectory + "\\Sprites\\Outside_C\\Frames\\";
+            int folderCount = GetFileCount(imageLocation);
+            for (int i = 0; i < folderCount; i++)
+            {
+                string tempImgLocation = imageLocation;
+                string name = "C1_tile";
+                string number = "";
+                if (i < 10)
+                    number += "00";
+                else if (i < 100)
+                    number += "0";
+                number += i;
+                name += number + ".png";
+
+                tempImgLocation += name;
+                string fullNumber = "C" + "1" + "_" + number;
+                idToSpriteLocation.Add(fullNumber, tempImgLocation);
+                LoadImage(tempImgLocation, fullNumber.First().ToString(), fullNumber);
+            }
+        }
+
+        /// <summary>
+        /// Load images to layer
+        /// </summary>
+        /// <param name="_fileCount">how many files are in the folder</param>
+        /// <param name="_imageLocation">location of Image</param>
+        /// <param name="_layer">only the Letter if he first 2 letters. egs: A1 --> A, B5 --> B</param>
+        /// <param name="_folderCount">only the number of the first 2 letters. egs: A1 --> 1, B5 --> 5</param>
+        private void LoadImagesToLayer(int _fileCount, string _imageLocation, string _layer, int _folderCount)
+        {
+            for (int i = 0; i < _fileCount; i++)
+            {
+                string tempImgLocation = _imageLocation;
+                string name = _layer + _folderCount + "_tile";
+                string number = "";
+                if (i < 10)
+                    number += "00";
+                else if (i < 100)
+                    number += "0";
+                number += i;
+                name += number + ".png";
+
+                tempImgLocation += name;
+                string fullNumber = _layer + _folderCount + "_" + number;
+                idToSpriteLocation.Add(fullNumber, tempImgLocation);
+                LoadImage(tempImgLocation, fullNumber.First().ToString(), fullNumber);
+
+            }
+
+        }
+
+        private int GetFileCount(string _path)
+        {
+            return GetFileCount(new DirectoryInfo(Environment.CurrentDirectory + "\\Sprites\\Outside_A1\\Frames\\"));
+        }
+
+        private int GetFileCount(DirectoryInfo _dInfo)
+        {
+            FileInfo[] fInfo = _dInfo.GetFiles("*.png");
+            return fInfo.GetLength(0);
+        }
+        #endregion
+
+        #endregion
+
+        #region Load Sprites
+        public void FillSprites()
+        {
+            //<Image Source="E:\Tobias\Bilder\IPhone Bilder\µ's.jpg" Stretch="Uniform" Height="50" Width="50" Margin="1"/>
+
+        }
+
+        private void LoadImage(string _path, string _layer, string _tag)
+        {
+            WrapPanel panel = null;
+            switch (_layer)
+            {
+                case "A":
+                    panel = WrapPanel_LayerA;
+                    break;
+                case "B":
+                    panel = WrapPanel_LayerB;
+                    break;
+                case "C":
+                    panel = WrapPanel_LayerC;
+                    break;
+                default:
+                    return;
+            }
+
+            Image img = new Image();
+            img.BeginInit();
+            img.Tag = _tag;
+            img.Focusable = false;
+
+            img.MouseLeftButtonDown += Img_MouseLeftButtonDown;
+            img.Source = new BitmapImage(new Uri(_path));
+            img.Height = 50;
+            img.Width = 50;
+            img.Stretch = Stretch.Uniform;
+
+
+            panel.Children.Add(img);
+            img.EndInit();
+        }
+        #endregion
     }
 }
