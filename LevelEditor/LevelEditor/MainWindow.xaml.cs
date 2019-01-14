@@ -83,6 +83,9 @@ namespace LevelEditor
 
         public MainWindow()
         {
+            // export files if they are missing
+            h.ExportFiles();
+
             InitializeComponent();
             CreateLayerA();
             CreateLayerB();
@@ -483,6 +486,7 @@ namespace LevelEditor
 
             // get image location
             CurrentImage.Source = new BitmapImage(new Uri(TagToImageLocation(CurrentSpriteID)));
+            
         }
 
         /// <summary>
