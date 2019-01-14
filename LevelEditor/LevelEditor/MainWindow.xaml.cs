@@ -40,11 +40,26 @@ namespace LevelEditor
         public static int currentTileArrayPos = 0;
         /// <summary>Current Sprite ID</summary>
         public static string CurrentSpriteID;
-        ///<summary>Current Button</summary>
-        private static Border CurrentImage = null;
+        ///<summary>Current Border</summary>
+        private static Border CurrentBorder = null;
+        ///<summary>Current Image</summary>
+        private static Image CurrentImage = null;
         public static string path;
 
-        private Dictionary<string, string> idToSpriteLocation = new Dictionary<string, string>();
+        ///<summary>A1 Sprite Location</summary>
+        private Dictionary<string, string> idToSpriteLocationA1 = new Dictionary<string, string>();
+        ///<summary>A2 Sprite Location</summary>
+        private Dictionary<string, string> idToSpriteLocationA2 = new Dictionary<string, string>();
+        ///<summary>A3 Sprite Location</summary>
+        private Dictionary<string, string> idToSpriteLocationA3 = new Dictionary<string, string>();
+        ///<summary>A4 Sprite Location</summary>
+        private Dictionary<string, string> idToSpriteLocationA4 = new Dictionary<string, string>();
+        ///<summary>A5 Sprite Location</summary>
+        private Dictionary<string, string> idToSpriteLocationA5 = new Dictionary<string, string>();
+        ///<summary>B1 Sprite Location</summary>
+        private Dictionary<string, string> idToSpriteLocationB1 = new Dictionary<string, string>();
+        ///<summary>C1 Sprite Location</summary>
+        private Dictionary<string, string> idToSpriteLocationC1 = new Dictionary<string, string>();
 
 
         ///<summary>true if something was changed</summary>
@@ -73,13 +88,7 @@ namespace LevelEditor
             CreateLayerB();
             CreateLayerC();
 
-            // Test
-            UIElementCollection u = Grid_GridBorder.Children;
-
             FillSprites();
-
-            u = Grid_GridBorder.Children;
-            var ItemInFirstRow = u.Cast<UIElement>().Where(i => Grid.GetRow(i) == 0);
             
         }
         
@@ -155,8 +164,10 @@ namespace LevelEditor
         #endregion
 
         #region Header
-        
-        #region ButtonClickEvent        
+
+        #region ButtonClickEvent   
+        #region New Button
+
         /// <summary>
         /// Create new Level File
         /// </summary>
@@ -220,6 +231,10 @@ namespace LevelEditor
             path = null;
         }
 
+        #endregion
+
+        #region Open
+
         /// <summary>
         /// Open File
         /// </summary>
@@ -276,9 +291,17 @@ namespace LevelEditor
             levelLayer = level.Layer.ToArray();
             levelTile = levelLayer[0].Tiles.ToArray();
 
+            SetImages();
+
             // loading complete. set statusbar
             SetStatus(Label_StatusbarOne, "Loading Complete", true);
+
+
         }
+
+        #endregion
+
+        #region Quit
 
         /// <summary>
         /// Close Application
@@ -297,6 +320,10 @@ namespace LevelEditor
                 Application.Current.Shutdown();
             }
         }
+
+        #endregion
+
+        #region Save
 
         /// <summary>
         /// Save File
@@ -317,6 +344,10 @@ namespace LevelEditor
             }
         }
 
+        #endregion
+
+        #region Save As
+
         /// <summary>
         /// Save File As ...
         /// </summary>
@@ -334,6 +365,7 @@ namespace LevelEditor
                 ConfirmClose = false;
         }
 
+        #endregion
 
         #endregion
 
@@ -342,6 +374,11 @@ namespace LevelEditor
         #region GroupBox
 
         #region Tiles
+        private void Img_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Image img = (Image)sender;
+            CurrentSpriteID = img.Tag.ToString();
+        }
         #endregion
 
         #region Properties Window
@@ -350,10 +387,10 @@ namespace LevelEditor
         private void TextBox_SpriteID_TextChanged(object sender, TextChangedEventArgs e)
         {
             // return if button = null
-            if (CurrentImage == null)
+            if (CurrentBorder == null)
                 return;
 
-            string BttnTag = CurrentImage.Tag.ToString();
+            string BttnTag = CurrentBorder.Tag.ToString();
             string[] tagSplit = BttnTag.Split('|');
             // check if input was number
             bool work = int.TryParse(TextBox_SpriteID.Text.ToString(), out int number);
@@ -376,6 +413,9 @@ namespace LevelEditor
         #region Comment
         private void TextBox_Comment_TextChanged(object sender, TextChangedEventArgs e)
         {
+            if (CurrentBorder == null)
+                return;
+
             levelTile[currentTileArrayPos].Commentary = TextBox_Comment.Text.ToString();
         }
         #endregion
@@ -385,7 +425,7 @@ namespace LevelEditor
         private void CheckBox_Collision_Checked(object sender, RoutedEventArgs e)
         {
             // return if no button was chosen
-            if (CurrentImage == null)
+            if (CurrentBorder == null)
                 return;
 
             levelTile[currentTileArrayPos].HasCollision = true;
@@ -394,7 +434,7 @@ namespace LevelEditor
         private void CheckBox_Collision_Unchecked(object sender, RoutedEventArgs e)
         {
             // return if no button was chosen
-            if (CurrentImage == null)
+            if (CurrentBorder == null)
                 return;
 
             levelTile[currentTileArrayPos].HasCollision = false;
@@ -421,26 +461,28 @@ namespace LevelEditor
         /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void Img_ClickLeft(object sender, RoutedEventArgs e)
         {
-            ResetTextBox();
-
-            CurrentImage = (Border)sender;
+            // return if no sprite was chosen
+            if (CurrentSpriteID == null)
+            {
+                return;
+            }
+            CurrentBorder = (Border)sender;
+            CurrentImage = (Image)CurrentBorder.Child;
             changed = true;
 
             // fill PosX and PosY
-            string BttnTag = CurrentImage.Tag.ToString();
+            string BttnTag = CurrentBorder.Tag.ToString();
             string[] tagSplit = BttnTag.Split('|');
             LayerArrayPos(tagSplit[0], tagSplit[1]);
 
+            // set new sprite ID
+            levelTile[currentTileArrayPos].SpriteID = CurrentSpriteID;
+
             // set Text at Properties
-            TextBox_PosX.Text = levelTile[currentTileArrayPos].PosX.ToString();
-            TextBox_PosY.Text = levelTile[currentTileArrayPos].PosY.ToString();
-            TextBox_SpriteID.Text = levelTile[currentTileArrayPos].SpriteID.ToString();
-            TextBox_SpriteID.BorderBrush = Brushes.Gray;
-            TextBox_SpriteID.Background = Brushes.White;
-            TextBox_Comment.Text = levelTile[currentTileArrayPos].Commentary.ToString();
-            CheckBox_Collision.IsChecked = levelTile[currentTileArrayPos].HasCollision;
-            TextBox_Tag.Text = levelTile[currentTileArrayPos].Tag.ToString();
-            
+            SetNewInfoForTextBox();
+
+            // get image location
+            CurrentImage.Source = new BitmapImage(new Uri(TagToImageLocation(CurrentSpriteID)));
         }
 
         /// <summary>
@@ -450,21 +492,15 @@ namespace LevelEditor
         /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void Img_ClickRight(object sender, RoutedEventArgs e)
         {
-            CurrentImage = (Border)sender;
-            changed = true;
+            CurrentBorder = (Border)sender;
 
             // fill PosX and PosY
-            string BttnTag = CurrentImage.Tag.ToString();
+            string BttnTag = CurrentBorder.Tag.ToString();
             string[] tagSplit = BttnTag.Split('|');
             LayerArrayPos(tagSplit[0], tagSplit[1]);
-            TextBox_PosX.Text = levelTile[currentTileArrayPos].PosX.ToString();
-            TextBox_PosY.Text = levelTile[currentTileArrayPos].PosY.ToString();
-            TextBox_SpriteID.Text = levelTile[currentTileArrayPos].SpriteID.ToString();
-            TextBox_SpriteID.BorderBrush = Brushes.Gray;
-            TextBox_SpriteID.Background = Brushes.White;
-            TextBox_Comment.Text = levelTile[currentTileArrayPos].Commentary.ToString();
-            CheckBox_Collision.IsChecked = levelTile[currentTileArrayPos].HasCollision;
-            TextBox_Tag.Text = levelTile[currentTileArrayPos].Tag.ToString();
+
+            // set Text at Properties
+            SetNewInfoForTextBox();
 
         }
 
@@ -488,11 +524,6 @@ namespace LevelEditor
             e.Cancel = !ConfirmClose;
         }
 
-        private void Img_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            Image img = (Image)sender;
-            CurrentSpriteID = img.Tag.ToString();
-        }
         // ----------------------------------------------------------------------------------------------------- //
 
         #region Create Grid and Border
@@ -775,6 +806,19 @@ namespace LevelEditor
             TextBox_Tag.Text = "";
         }
 
+        private void SetNewInfoForTextBox()
+        {
+            TextBox_PosX.Text = levelTile[currentTileArrayPos].PosX.ToString();
+            TextBox_PosY.Text = levelTile[currentTileArrayPos].PosY.ToString();
+            TextBox_SpriteID.Text = levelTile[currentTileArrayPos].SpriteID.ToString();
+            TextBox_SpriteID.BorderBrush = Brushes.Gray;
+            TextBox_SpriteID.Background = Brushes.White;
+            TextBox_Comment.Text = levelTile[currentTileArrayPos].Commentary.ToString();
+            CheckBox_Collision.IsChecked = levelTile[currentTileArrayPos].HasCollision;
+            TextBox_Tag.Text = levelTile[currentTileArrayPos].Tag.ToString();
+
+        }
+
         #region Show images in Layer
 
         #region Layer A
@@ -795,25 +839,9 @@ namespace LevelEditor
         private void CreateLayerB()
         {
             string imageLocation = Environment.CurrentDirectory + "\\Sprites\\Outside_B\\Frames\\";
-            int folderCount = GetFileCount(imageLocation);
-            for (int i = 0; i < folderCount; i++)
-            {
-                string tempImgLocation = imageLocation;
-                string name = "B1_tile";
-                string number = "";
-                if (i < 10)
-                    number += "00";
-                else if (i < 100)
-                    number += "0";
-                number += i;
-                name += number + ".png";
-
-                tempImgLocation += name;
-                string fullNumber = "B" + "1" + "_" + number;
-                idToSpriteLocation.Add(fullNumber, tempImgLocation);
-                LoadImage(tempImgLocation, fullNumber.First().ToString(), fullNumber);
-
-            }
+            string[] allFiles = Directory.GetFiles(imageLocation, "*.png", SearchOption.TopDirectoryOnly);
+            int fileCount = allFiles.GetLength(0);
+            LoadImagesToLayer(fileCount, imageLocation, "B", 1);
         }
         #endregion
 
@@ -821,24 +849,9 @@ namespace LevelEditor
         private void CreateLayerC()
         {
             string imageLocation = Environment.CurrentDirectory + "\\Sprites\\Outside_C\\Frames\\";
-            int folderCount = GetFileCount(imageLocation);
-            for (int i = 0; i < folderCount; i++)
-            {
-                string tempImgLocation = imageLocation;
-                string name = "C1_tile";
-                string number = "";
-                if (i < 10)
-                    number += "00";
-                else if (i < 100)
-                    number += "0";
-                number += i;
-                name += number + ".png";
-
-                tempImgLocation += name;
-                string fullNumber = "C" + "1" + "_" + number;
-                idToSpriteLocation.Add(fullNumber, tempImgLocation);
-                LoadImage(tempImgLocation, fullNumber.First().ToString(), fullNumber);
-            }
+            string[] allFiles = Directory.GetFiles(imageLocation, "*.png", SearchOption.TopDirectoryOnly);
+            int fileCount = allFiles.GetLength(0);
+            LoadImagesToLayer(fileCount, imageLocation, "C", 1);
         }
 
         /// <summary>
@@ -864,7 +877,34 @@ namespace LevelEditor
 
                 tempImgLocation += name;
                 string fullNumber = _layer + _folderCount + "_" + number;
-                idToSpriteLocation.Add(fullNumber, tempImgLocation);
+                // add to dictionary
+                switch (_layer + _folderCount)
+                {
+                    case "A1":
+                        idToSpriteLocationA1.Add(fullNumber, tempImgLocation);
+                        break;
+                    case "A2":
+                        idToSpriteLocationA2.Add(fullNumber, tempImgLocation);
+                        break;
+                    case "A3":
+                        idToSpriteLocationA3.Add(fullNumber, tempImgLocation);
+                        break;
+                    case "A4":
+                        idToSpriteLocationA4.Add(fullNumber, tempImgLocation);
+                        break;
+                    case "A5":
+                        idToSpriteLocationA5.Add(fullNumber, tempImgLocation);
+                        break;
+                    case "B1":
+                        idToSpriteLocationB1.Add(fullNumber, tempImgLocation);
+                        break;
+                    case "C1":
+                        idToSpriteLocationC1.Add(fullNumber, tempImgLocation);
+                        break;
+                    default:
+                        break;
+                }
+
                 LoadImage(tempImgLocation, fullNumber.First().ToString(), fullNumber);
 
             }
@@ -926,5 +966,69 @@ namespace LevelEditor
             img.EndInit();
         }
         #endregion
+
+        /// <summary>
+        /// looks up in dictionary to convert from tag to location
+        /// </summary>
+        /// <param name="_tag">Tag of Image</param>
+        /// <returns>location of image</returns>
+        private string TagToImageLocation(string _tag)
+        {
+            string chars = FirstTwoChars(_tag);
+            string imageLocation = "";
+            switch (chars)
+            {
+                case "A1":
+                    imageLocation = idToSpriteLocationA1[_tag];
+                    break;
+                case "A2":
+                    imageLocation = idToSpriteLocationA2[_tag];
+                    break;
+                case "A3":
+                    imageLocation = idToSpriteLocationA3[_tag];
+                    break;
+                case "A4":
+                    imageLocation = idToSpriteLocationA4[_tag];
+                    break;
+                case "A5":
+                    imageLocation = idToSpriteLocationA5[_tag];
+                    break;
+                case "B1":
+                    imageLocation = idToSpriteLocationB1[_tag];
+                    break;
+                case "C1":
+                    imageLocation = idToSpriteLocationC1[_tag];
+                    break;
+                default:
+                    break;
+            }
+
+            return imageLocation;
+        }
+
+        private string FirstTwoChars(string _word)
+        {
+            char[] c = _word.ToCharArray();
+            string s = (c[0].ToString() + c[1].ToString()).ToString();
+            return s;
+        }
+
+        private void SetImages()
+        {
+            int count = -1;
+            foreach (Border border in Grid_GridBorder.Children)
+            {
+                count++;
+                // get image from border
+                Image img = (Image)border.Child;
+                // if ID is empty continue
+                if (levelTile[count].SpriteID == "0")
+                {
+                    continue;
+                }
+                // set image
+                img.Source = new BitmapImage(new Uri(TagToImageLocation(levelTile[count].SpriteID)));
+            }
+        }
     }
 }

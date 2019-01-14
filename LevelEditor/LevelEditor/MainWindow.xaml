@@ -28,9 +28,9 @@
         <!--Komplettes mittleres Feld-->
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="30*"/>
+                <ColumnDefinition Width="45*"/>
                 <ColumnDefinition Width="6"/>
-                <ColumnDefinition Width="70*"/>
+                <ColumnDefinition Width="55*"/>
             </Grid.ColumnDefinitions>
             <!--Spalte Rechte Seite-->
             <!--Spalten-->
