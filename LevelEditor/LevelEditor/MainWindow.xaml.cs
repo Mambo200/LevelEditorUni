@@ -48,8 +48,8 @@ namespace LevelEditor
         private static Border CurrentBorder = null;
         ///<summary>Current Image</summary>
         private static Image CurrentImage = null;
-        ///<summary>all images, first dimension is layer</summary>
-        private static Image[,] allImages = null;
+        private static Image[] allBImages = null;
+        private static Image[] allCImages = null;
         public static string path;
 
         ///<summary>A1 Sprite Location</summary>
@@ -484,29 +484,32 @@ namespace LevelEditor
             string BttnTag = CurrentBorder.Tag.ToString();
             string[] tagSplit = BttnTag.Split('|');
 
-            
-            CurrentImage = (Image)CurrentBorder.Child;
-            changed = true;
-
             // fill PosX and PosY
             LayerArrayPos(tagSplit[0], tagSplit[1]);
-
+            
             char firstLetter = CurrentSpriteID[0];
             // set new sprite ID
             switch (firstLetter)
             {
                 case 'A':
                     levelTileA[currentTileArrayPos].SpriteID = CurrentSpriteID;
+                    CurrentImage = (Image)CurrentBorder.Child;
                     break;
                 case 'B':
                     levelTileB[currentTileArrayPos].SpriteID = CurrentSpriteID;
+                    CurrentImage = allBImages[currentTileArrayPos];
                     break;
                 case 'C':
                     levelTileC[currentTileArrayPos].SpriteID = CurrentSpriteID;
+                    CurrentImage = allCImages[currentTileArrayPos];
                     break;
                 default:
                     break;
             }
+            
+            changed = true;
+
+
 
 
             // set Text at Properties
@@ -607,6 +610,9 @@ namespace LevelEditor
             levelTileB = new Tile[_rowDef * _columnDef];
             levelTileC = new Tile[_rowDef * _columnDef];
 
+            allBImages = new Image[_rowDef * _columnDef];
+            allCImages = new Image[_rowDef * _columnDef];
+
             // counter
             int counter = 0;
 
@@ -628,16 +634,47 @@ namespace LevelEditor
                     t.Commentary = "";
                     t.HasCollision = false;
                     t.Tag = "";
-
                     // copy tile to array
                     levelTileA[counter] = t;
+
+                    // create Tile
+                    t = new Tile();
+                    t.PosX = col;
+                    t.PosY = row;
+                    t.SpriteID = "0";
+                    t.Commentary = "";
+                    t.HasCollision = false;
+                    t.Tag = "";
+                    // copy tile to array
                     levelTileB[counter] = t;
+
+                    // create Tile
+                    t = new Tile();
+                    t.PosX = col;
+                    t.PosY = row;
+                    t.SpriteID = "0";
+                    t.Commentary = "";
+                    t.HasCollision = false;
+                    t.Tag = "";
+                    // copy tile to array
                     levelTileC[counter] = t;
+
+                    Image img1 = CreateImage(row, col, col + "|" + row);
+                    Image img2 = CreateImage(row, col, col + "|" + row);
+
+                    allBImages[counter] = img1;
+                    allCImages[counter] = img2;
                     counter++;
                 }
+
+
                 // set layer
                 levelLayer[0].ZOrder = 0;
                 levelLayer[0].Tiles = levelTileA.ToList();
+                levelLayer[1].ZOrder = 1;
+                levelLayer[1].Tiles = levelTileB.ToList();
+                levelLayer[2].ZOrder = 2;
+                levelLayer[2].Tiles = levelTileC.ToList();
             }
             // set status
             SetStatus(Label_StatusbarOne, "Images created");
