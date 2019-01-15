@@ -18,6 +18,14 @@ namespace LevelFramework
         ///<summary>Layers in Game</summary>
         public List<Layer> Layer;
 
+        public Level(string _name, int _sizeX, int _sizeY, List<Layer> _layer)
+        {
+            Name = _name;
+            SizeX = _sizeX;
+            SizeY = _sizeY;
+            Layer = _layer;
+        }
+
         public override string ToString()
         {
             return Name;
@@ -31,6 +39,18 @@ namespace LevelFramework
         public int ZOrder;
         ///<summary>Tiles in Layer</summary>
         public List<Tile> Tiles;
+
+        public Layer(int _zOrder, List<Tile> _tile)
+        {
+            ZOrder = _zOrder;
+            Tiles = _tile;
+        }
+
+        public Layer(int _zOrder, params Tile[] _tile)
+        {
+            ZOrder = _zOrder;
+            Tiles = _tile.ToList();
+        }
     }
 
     [Serializable]
@@ -49,9 +69,19 @@ namespace LevelFramework
         ///<summary>Tag to this Tile</summary>
         public string Tag;
 
+        public Tile(string _spriteID, int _posX, int _posY, bool _hasCollision, string _commentary, string _tag)
+        {
+            SpriteID = _spriteID;
+            PosX = _posX;
+            PosY = _posY;
+            HasCollision = _hasCollision;
+            Commentary = _commentary;
+            Tag = _tag;
+        }
+
         public override string ToString()
         {
-            return (PosX + '|' + PosY).ToString();
+            return (PosX.ToString() + '|' + PosY.ToString()).ToString();
         }
     }
 }
