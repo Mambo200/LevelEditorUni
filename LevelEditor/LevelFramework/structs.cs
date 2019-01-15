@@ -45,7 +45,7 @@ namespace LevelFramework
             ZOrder = _zOrder;
             Tiles = _tile;
         }
-        
+
         public Layer(int _zOrder, params Tile[] _tile)
         {
             ZOrder = _zOrder;

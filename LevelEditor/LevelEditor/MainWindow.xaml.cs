@@ -344,6 +344,7 @@ namespace LevelEditor
             {
                 lvlManager.SaveLevel(path, level);
                 ConfirmClose = true;
+                changed = false;
             }
         }
 
@@ -364,7 +365,7 @@ namespace LevelEditor
             h.SaveFile(out bool? succellful);
             if (succellful == true)
                 ConfirmClose = true;
-            else
+            else 
                 ConfirmClose = false;
         }
 
@@ -486,7 +487,6 @@ namespace LevelEditor
 
             // get image location
             CurrentImage.Source = new BitmapImage(new Uri(TagToImageLocation(CurrentSpriteID)));
-            
         }
 
         /// <summary>
@@ -497,7 +497,7 @@ namespace LevelEditor
         private void Img_ClickRight(object sender, RoutedEventArgs e)
         {
             CurrentBorder = (Border)sender;
-
+          
             // fill PosX and PosY
             string BttnTag = CurrentBorder.Tag.ToString();
             string[] tagSplit = BttnTag.Split('|');
@@ -508,6 +508,13 @@ namespace LevelEditor
 
         }
 
+        private void Img_MouseEnter(object sender, MouseEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                Img_ClickLeft(sender, new RoutedEventArgs());
+            }
+        }
         #endregion
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
@@ -644,10 +651,12 @@ namespace LevelEditor
             border.BorderBrush = Brushes.Black;
             border.MouseLeftButtonDown += Img_ClickLeft;
             border.MouseRightButtonDown += Img_ClickRight;
+            border.MouseEnter += Img_MouseEnter;
             border.Tag = _col + "|" + _row;
 
             return border;
         }
+
         #endregion
 
         #region Show Button Function
