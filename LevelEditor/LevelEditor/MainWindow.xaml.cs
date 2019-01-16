@@ -345,6 +345,9 @@ namespace LevelEditor
         private void Button_Save_Click(object sender, RoutedEventArgs e)
         {
             levelLayer[0].Tiles = levelTileA.ToList();
+            levelLayer[1].Tiles = levelTileB.ToList();
+            levelLayer[2].Tiles = levelTileC.ToList();
+
             level.Layer = levelLayer.ToList();
 
             if (path == null)
@@ -369,6 +372,9 @@ namespace LevelEditor
         private void Button_SaveAs_Click(object sender, RoutedEventArgs e)
         {
             levelLayer[0].Tiles = levelTileA.ToList();
+            levelLayer[1].Tiles = levelTileB.ToList();
+            levelLayer[2].Tiles = levelTileC.ToList();
+
             level.Layer = levelLayer.ToList();
 
             h.SaveFile(out bool? succellful);
