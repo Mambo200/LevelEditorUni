@@ -302,6 +302,8 @@ namespace LevelEditor
             level = tmpLevel;
             levelLayer = level.Layer.ToArray();
             levelTileA = levelLayer[0].Tiles.ToArray();
+            levelTileB = levelLayer[1].Tiles.ToArray();
+            levelTileC = levelLayer[2].Tiles.ToArray();
 
             SetImages();
 
