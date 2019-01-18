@@ -48,6 +48,7 @@ namespace LevelEditor
         private static Border CurrentBorder = null;
         ///<summary>Current Image</summary>
         private static Image CurrentImage = null;
+
         private static Image[] allBImages = null;
         private static Image[] allCImages = null;
         public static string path;
@@ -97,8 +98,7 @@ namespace LevelEditor
             CreateLayerB();
             CreateLayerC();
 
-            FillSprites();
-            
+            AddToRecentFilesHeader();
         }
         
         /// <summary>
@@ -359,7 +359,10 @@ namespace LevelEditor
                 lvlManager.SaveLevel(path, level);
                 ConfirmClose = true;
                 changed = false;
+                h.AddPathToTextFile(path);
+                AddToRecentFilesHeader();
             }
+            SetStatus(Label_StatusbarOne, "Successful saved to " + path, true, "Save");
         }
 
         #endregion
@@ -381,9 +384,16 @@ namespace LevelEditor
 
             h.SaveFile(out bool? succellful);
             if (succellful == true)
+            {
                 ConfirmClose = true;
-            else 
+                h.AddPathToTextFile(path);
+                AddToRecentFilesHeader();
+                SetStatus(Label_StatusbarOne, "Successful saved to " + path, true, "Save As");
+            }
+            else
                 ConfirmClose = false;
+
+
         }
 
         #endregion
@@ -399,6 +409,11 @@ namespace LevelEditor
         {
             Image img = (Image)sender;
             CurrentSpriteID = img.Tag.ToString();
+            string statusText = "";
+            statusText += FirstTwoChars(CurrentSpriteID);
+            statusText += "-";
+            statusText += GetLastChars(CurrentSpriteID, 3);
+            SetStatus(Label_StatusbarThree, statusText + " chosen");
         }
         #endregion
 
@@ -525,6 +540,9 @@ namespace LevelEditor
 
             // get image location
             CurrentImage.Source = new BitmapImage(new Uri(TagToImageLocation(CurrentSpriteID)));
+
+            SetStatus(Label_StatusbarTwo, "changes sprites of " + BttnTag);
+            SetStatus(Label_StatusbarOne, "Idle");
         }
 
         /// <summary>
@@ -543,6 +561,7 @@ namespace LevelEditor
 
             // set Text at Properties
             SetNewInfoForTextBox();
+            SetStatus(Label_StatusbarOne, "Idle");
 
         }
 
@@ -1045,12 +1064,6 @@ namespace LevelEditor
         #endregion
 
         #region Load Sprites
-        public void FillSprites()
-        {
-            //<Image Source="E:\Tobias\Bilder\IPhone Bilder\µ's.jpg" Stretch="Uniform" Height="50" Width="50" Margin="1"/>
-
-        }
-
         private void LoadImage(string _path, string _layer, string _tag)
         {
             WrapPanel panel = null;
@@ -1149,5 +1162,118 @@ namespace LevelEditor
                 img.Source = new BitmapImage(new Uri(TagToImageLocation(levelTileA[count].SpriteID)));
             }
         }
+
+        #region Recent Files
+        private void AddToRecentFilesHeader()
+        {
+            // remove all header if header exists
+            while (true)
+            {
+
+                if (Button_RecentFiles.HasItems)
+                {
+                    Button_RecentFiles.Items.RemoveAt(0);
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            // read Text File
+            string[] files = h.ReadTextFile();
+
+            // add Header
+            for (int LinesAmount = 0; LinesAmount < files.Length; LinesAmount++)
+            {
+                // check if string is empty, break out
+                if (files[LinesAmount] == "" || files[LinesAmount] == null)
+                {
+                    break;
+                }
+
+                // create new menu item
+                MenuItem item = new MenuItem();
+                item.Header = files[LinesAmount];
+                item.Click += OpenFile;
+                Button_RecentFiles.Items.Add(item);
+            }
+
+            // if recent files is empty create header wit empty
+            if (Button_RecentFiles.HasItems == false)
+            {
+                MenuItem empty = new MenuItem();
+                empty.Header = "(empty)";
+                empty.IsEnabled = false;
+                Button_RecentFiles.Items.Add(empty);
+            }
+
+
+
+        }
+
+        private void OpenFile(object sender, RoutedEventArgs e)
+        {
+            MenuItem clickedItem = (MenuItem)sender;
+            LoadFile(clickedItem.Header.ToString());
+        }
+
+        private void LoadFile(string _path)
+        {
+            if (File.Exists(_path) == false)
+            {
+                MessageBox.Show("File could not be found: " + _path, "Something went wrong", MessageBoxButton.OK);
+                return;
+            }
+            Level level = new Level();
+            Level tmpLevel = new Level();
+            if (_path.EndsWith(".lvl".ToLower()))
+            {
+                level = lvlManager.LoadLevel(_path);
+            }
+            else
+            {
+                level = lvlManager.LoadLevelXML(_path);
+            }
+
+            // save to temp level
+            tmpLevel = level;
+
+            if (allBorders != null)
+            {
+                // delete old grid and buttons
+                DeleteEverything();
+            }
+
+            // set grid and buttons
+            GenerateGridWithButtons(level.SizeY, level.SizeX);
+
+            // set level, temp layer and Tiles
+            level = tmpLevel;
+            levelLayer = level.Layer.ToArray();
+            levelTileA = levelLayer[0].Tiles.ToArray();
+            levelTileB = levelLayer[1].Tiles.ToArray();
+            levelTileC = levelLayer[2].Tiles.ToArray();
+
+            SetImages();
+
+            path = _path;
+
+            // loading complete. set statusbar
+            SetStatus(Label_StatusbarOne, "Loading Complete", true);
+        }
+        #endregion
+
+        private string GetLastChars(string _id, int _charCount)
+        {
+            char[] idArray = _id.ToCharArray();
+            string toReturn = "";
+            for (int i = 0; i < _charCount; i++)
+            {
+                toReturn = idArray[idArray.GetLength(0) - (1 + i)] + toReturn;
+            }
+            return toReturn;
+        }
+
     }
 }

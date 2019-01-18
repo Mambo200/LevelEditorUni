@@ -19,6 +19,7 @@
             <MenuItem Header="File" TabIndex="0" Focusable="False">
                 <MenuItem x:Name="Button_New" Header="New" Click="Button_New_Click"/>
                 <MenuItem x:Name="Button_Open" Header="Open..." Click="Button_Open_Click"/>
+                <MenuItem x:Name="Button_RecentFiles" Header="Recent Files"/>
                 <MenuItem x:Name="Button_Save" Header="Save" Click="Button_Save_Click"/>
                 <MenuItem x:Name="Button_SaveAs" Header="Save As..." Click="Button_SaveAs_Click"/>
                 <Separator/>
