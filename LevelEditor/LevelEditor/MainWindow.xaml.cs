@@ -944,6 +944,9 @@ namespace LevelEditor
 
         private void SetNewInfoForTextBox()
         {
+            // save level name
+            string lvlName = level.Name;
+
             TextBox_PosX.Text = levelTileA[currentTileArrayPos].PosX.ToString();
             TextBox_PosY.Text = levelTileA[currentTileArrayPos].PosY.ToString();
             TextBox_SpriteID.Text = levelTileA[currentTileArrayPos].SpriteID.ToString();
@@ -955,6 +958,8 @@ namespace LevelEditor
             CheckBox_Collision.IsChecked = levelTileA[currentTileArrayPos].HasCollision;
             TextBox_Tag.Text = levelTileA[currentTileArrayPos].Tag.ToString();
 
+            // set level name back
+            level.Name = lvlName;
         }
 
         #region Show images in Layer

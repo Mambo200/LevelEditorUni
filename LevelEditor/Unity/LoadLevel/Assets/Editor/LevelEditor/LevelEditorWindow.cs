@@ -15,33 +15,44 @@ public class LevelEditorWindow : EditorWindow
 
     private void OnGUI()
     {
-
-        //m_Plane = (GameObject)EditorGUILayout.ObjectField(m_Plane, typeof(GameObject), true);
-
+        // open file dialog
         if (GUILayout.Button("Open File"))
         {
+            // button pressed
+            // create new level Manager
             LevelManager lvlManager = new LevelManager();
+            // load level from open file dialog
             Level loadedLevel = lvlManager.LoadLevel(EditorUtility.OpenFilePanel("Level to be loaded...", "", "lvl"));
+            // generate level
             GenerateField(loadedLevel);
         }
     }
 
+    /// <summary>
+    /// Generate Level with planes
+    /// </summary>
+    /// <param name="_level">Level to load</param>
     private void GenerateField(Level _level)
     {        
-        // parent
+        // parent object
         GameObject parent = new GameObject("Level " + _level.Name);
+        // layer parent object
         GameObject[] parentLayer = new GameObject[3];
 
+        // set parents
+        parent.transform.position.Set(0, 0, 0);
+        // create empty objects with Name and position
         for (int i = 0; i < parentLayer.GetLength(0); i++)
         {
             parentLayer[i] = new GameObject("Layer" + (i + 1) + " " + _level.Name);
             parentLayer[i].transform.position.Set(0, 0, i * -0.1f);
         }
 
+        // load level Layer and Tiles
         Layer[] allLayerInLevel = _level.Layer.ToArray();
         Tile[,] allTilesInLayer = new Tile[allLayerInLevel.GetLength(0), _level.SizeX * _level.SizeY];
 
-        // get all tiles
+        // get all tiles, copy them in an Array
         for (int i = 0; i < allLayerInLevel.GetLength(0); i++)
         {
             int counter = -1;
@@ -52,25 +63,24 @@ public class LevelEditorWindow : EditorWindow
             }
         }
 
-        // set parents
-        parent.transform.position.Set(0, 0, 0);
-
-
-
+        // set shader to transparent
         Shader transparent = Shader.Find("Unlit/Transparent");
 
         for (int layerCount = 0; layerCount < allTilesInLayer.GetLength(0); layerCount++)
         {
             for (int xy = 0; xy < allTilesInLayer.GetLength(1); xy++)
             {
+                // Create new Plane
                 GameObject m_Plane = GameObject.CreatePrimitive(PrimitiveType.Plane);
 
+                // get current Tile
                 Tile CurrentTile = allTilesInLayer[layerCount, xy];
+                // set positions
                 int posX = CurrentTile.PosX;
                 int posY = CurrentTile.PosY;
 
 
-                #region Set stats
+                #region Set plane stats
                 // disable meshcollider
                 m_Plane.GetComponent<MeshCollider>().enabled = false;
                 // add box collider
@@ -79,10 +89,9 @@ public class LevelEditorWindow : EditorWindow
                     m_Plane.AddComponent<BoxCollider>();
                     m_Plane.GetComponent<BoxCollider>().size = new Vector3(10, 10, 10);
                 }
-                // set texture
-                Material m_PlaneMat = m_Plane.GetComponent<Renderer>().sharedMaterial;
-                string path = /*Application.dataPath + */"Sprites/";
 
+                // get Path of Sprite
+                string path = "Sprites/";
                 string cut = "";
                 if (CurrentTile.SpriteID == "0")
                     cut = CurrentTile.SpriteID = "00";
@@ -125,20 +134,18 @@ public class LevelEditorWindow : EditorWindow
                     path += GetLastChars(CurrentTile.SpriteID, 3);
                 }
 
-                /* "Assets\\Sprites\\Outside_A1\\Frames\\" + CurrentTile.SpriteID.ToString();*/
-
-
-
+                // load Texture from resources
                 Texture m_Texture = Resources.Load<Texture2D>(path);
 
+                // set texture and shader of plane
                 m_Plane.GetComponent<Renderer>().material.mainTexture = m_Texture;
                 m_Plane.GetComponent<Renderer>().material.shader = transparent;
-                //Renderer rend = m_Plane.GetComponent<Renderer>();
-                //rend.material.mainTexture = m_Texture;
                 #endregion
 
+                // clone plane to Scene
                 Instantiate(m_Plane, new Vector3(posX * 10, -posY * 10, 0), Quaternion.Euler(90.0f, 0.0f, 180.0f), parentLayer[layerCount].transform);
 
+                // destroy original plane
                 DestroyImmediate(m_Plane);
 
             }
@@ -153,9 +160,16 @@ public class LevelEditorWindow : EditorWindow
             DestroyImmediate(parentLayer[i]);
         }
     }
-    private string GetFirstChars(string _id, int _charCount)
+
+    /// <summary>
+    /// get chars from string at the beginning
+    /// </summary>
+    /// <param name="_word">string to cut</param>
+    /// <param name="_charCount">how many chars shall be copied</param>
+    /// <returns>cutted string</returns>
+    private string GetFirstChars(string _word, int _charCount)
     {
-        char[] idArray = _id.ToCharArray();
+        char[] idArray = _word.ToCharArray();
         string toReturn = "";
         for (int i = 0; i < _charCount; i++)
         {
@@ -164,17 +178,15 @@ public class LevelEditorWindow : EditorWindow
         return toReturn;
     }
 
-    private string GetLastChars(string _id, int _charCount)
+    /// <summary>
+    /// get chars from string at the end
+    /// </summary>
+    /// <param name="word">string to cut</param>
+    /// <param name="_charCount">how many chars shall be copied</param>
+    /// <returns>cutted string</returns>
+    private string GetLastChars(string word, int _charCount)
     {
-        /*char[] idArray = _id.ToCharArray();
-        string toReturn = "";
-        for (int i = 0; i < _charCount; i++)
-        {
-            toReturn = idArray[idArray.GetLength(0) - _charCount] + toReturn;
-        }
-        return toReturn;*/
-
-        char[] idArray = _id.ToCharArray();
+        char[] idArray = word.ToCharArray();
         string toReturn = "";
         for (int i = 0; i < _charCount; i++)
         {
