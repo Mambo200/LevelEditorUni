@@ -35,6 +35,7 @@ public class LevelEditorWindow : EditorWindow
         for (int i = 0; i < parentLayer.GetLength(0); i++)
         {
             parentLayer[i] = new GameObject("Layer" + (i + 1) + " " + _level.Name);
+            parentLayer[i].transform.position.Set(0, 0, i * -0.1f);
         }
 
         Layer[] allLayerInLevel = _level.Layer.ToArray();
@@ -54,8 +55,9 @@ public class LevelEditorWindow : EditorWindow
         // set parents
         parent.transform.position.Set(0, 0, 0);
 
-        
 
+
+        Shader transparent = Shader.Find("Unlit/Transparent");
 
         for (int layerCount = 0; layerCount < allTilesInLayer.GetLength(0); layerCount++)
         {
@@ -130,11 +132,12 @@ public class LevelEditorWindow : EditorWindow
                 Texture m_Texture = Resources.Load<Texture2D>(path);
 
                 m_Plane.GetComponent<Renderer>().material.mainTexture = m_Texture;
+                m_Plane.GetComponent<Renderer>().material.shader = transparent;
                 //Renderer rend = m_Plane.GetComponent<Renderer>();
                 //rend.material.mainTexture = m_Texture;
                 #endregion
 
-                Instantiate(m_Plane, new Vector3(posX * 10, -posY * 10, layerCount * -0.1f), Quaternion.Euler(90.0f, 0.0f, 180.0f), parentLayer[layerCount].transform);
+                Instantiate(m_Plane, new Vector3(posX * 10, -posY * 10, 0), Quaternion.Euler(90.0f, 0.0f, 180.0f), parentLayer[layerCount].transform);
 
                 DestroyImmediate(m_Plane);
 
