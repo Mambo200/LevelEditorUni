@@ -163,12 +163,21 @@ public class LevelEditorWindow : EditorWindow
 
     private string GetLastChars(string _id, int _charCount)
     {
-        char[] idArray = _id.ToCharArray();
+        /*char[] idArray = _id.ToCharArray();
         string toReturn = "";
         for (int i = 0; i < _charCount; i++)
         {
             toReturn = idArray[idArray.GetLength(0) - _charCount] + toReturn;
         }
+        return toReturn;*/
+
+        char[] idArray = _id.ToCharArray();
+        string toReturn = "";
+        for (int i = 0; i < _charCount; i++)
+        {
+            toReturn = idArray[idArray.GetLength(0) - (1 + i)] + toReturn;
+        }
         return toReturn;
     }
+
 }

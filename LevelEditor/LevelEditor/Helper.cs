@@ -13,6 +13,9 @@ namespace LevelEditor
 {
     public class Helper
     {
+        public static string RecentFilesPath { get { return Environment.CurrentDirectory + "\\RecentFiles.txt"; } }
+        public static int RecentFilesAmount { get { return 10; } }
+
         /// <summary>
         /// Opens a open file dialog
         /// </summary>
@@ -116,6 +119,101 @@ namespace LevelEditor
                 return false;
         }
 
+        /// <summary>
+        /// Add path to text file. If no file exists create one
+        /// </summary>
+        /// <param name="_pathOfLevel">Path of level file</param>
+        public void AddPathToTextFile(string _pathOfLevel)
+        {
+            // check if given Path exist
+            if (File.Exists(_pathOfLevel) == false)
+            {
+                System.Windows.MessageBox.Show(
+                    "File could not be found. Path will not be added to recent files",
+                    "File not found",
+                    System.Windows.MessageBoxButton.OK
+                    );
+                return;
+            }
+
+            // Create file if file not exists
+            if (File.Exists(RecentFilesPath) == false)
+            {
+                CreateTextFile();
+            }
+
+            // open file
+            StreamReader reader = new StreamReader(RecentFilesPath);
+
+            string[] content = new string[RecentFilesAmount];
+
+            for (int i = 0; i < RecentFilesAmount; i++)
+            {
+                string s = "";
+                s += reader.ReadLine();
+
+                content[i] = s;
+            }
+            reader.Close();
+
+            // write to File
+            System.IO.StreamWriter writer = new StreamWriter(RecentFilesPath);
+            writer.WriteLine(_pathOfLevel);
+            for (int arrayPos = 0; arrayPos < content.Length - 1; arrayPos++)
+            {
+                // if no content in string break out
+                if (content[arrayPos] == null)
+                {
+                    break;
+                }
+                writer.WriteLine(content[arrayPos]);
+            }
+            writer.Close();
+        }
+
+        /// <summary>
+        /// Read text file of level paths
+        /// </summary>
+        /// <returns>all saved level paths</returns>
+        public string[] ReadTextFile()
+        {
+            // Create file if file not exists
+            if (File.Exists(RecentFilesPath) == false)
+            {
+                CreateTextFile();
+            }
+
+            string[] content = new string[RecentFilesAmount];
+            StreamReader reader = new StreamReader(RecentFilesPath);
+
+            // Read Lines
+            for (int i = 0; i < content.Length; i++)
+            {
+                string s = "";
+                s += reader.ReadLine();
+
+                // if string is empty break out
+                if (s == "")
+                {
+                    break;
+                }
+
+                content[i] = s;
+            }
+
+            return content;
+        }
+
+        /// <summary>
+        /// Create text file
+        /// </summary>
+        public void CreateTextFile()
+        {
+            StreamWriter s = File.CreateText(RecentFilesPath);
+            s.Close();
+        }
+
+        #region Export Files if folder "Sprites" does not exist
         public void ExportFiles()
         {
             // check if Sprites folder exist
@@ -1644,6 +1742,7 @@ namespace LevelEditor
             Properties.Resources.C1_tile254.Save(_infoC.FullName + "\\C1_tile254.png");
             Properties.Resources.C1_tile255.Save(_infoC.FullName + "\\C1_tile255.png");
         }
+        #endregion
 
     }
 }
